@@ -1,90 +1,93 @@
 ---
 ---
-<section class="section equipment-section" id="equipment">
-  <div class="container">
-    <div class="equipment-header">
-      <span class="eyebrow">Оборудование //</span>
+<section class="relative py-[clamp(5rem,9vw,9rem)] bg-bg-darkest border-t border-border z-10" id="equipment">
+  <!-- Glow -->
+  <div class="absolute top-1/2 -right-32 w-72 h-72 bg-glow-violet rounded-full blur-3xl animate-float pointer-events-none"></div>
+
+  <div class="w-full max-w-[1200px] mx-auto px-8">
+    <div class="mb-12 max-w-[600px]" data-reveal>
+      <span class="font-mono text-[0.7rem] font-normal tracking-[0.15em] text-accent inline-flex items-center gap-2 mb-4 uppercase before:content-['//'] before:text-text-muted">Оборудование //</span>
       <h2>Профессиональное оборудование</h2>
-      <p class="equipment-sub">
+      <p class="text-[1.05rem] text-text-secondary">
         Качество звука и картинки — наш главный приоритет. Мы используем передовую технику мировых брендов.
       </p>
     </div>
 
     <!-- Tabs Container -->
-    <div class="tabs-container">
-      <div class="tabs-nav" role="tablist" aria-label="Спецификация оборудования">
-        <button class="tab-btn active" role="tab" aria-selected="true" data-tab="audio">
+    <div class="flex flex-col gap-8" data-reveal data-reveal-delay="2">
+      <div class="flex border-b border-border gap-8" role="tablist" aria-label="Спецификация оборудования">
+        <button class="tab-btn active relative bg-transparent border-none text-text-secondary font-mono text-sm font-medium tracking-[0.1em] pb-4 cursor-pointer transition-colors duration-200 hover:text-accent [&.active]:text-accent after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1.5px] after:bg-accent after:origin-right after:scale-x-0 after:transition-transform after:duration-400 [&.active]:after:scale-x-100 [&.active]:after:origin-left [&.active]:after:shadow-[0_0_8px_rgba(200,162,123,0.3)]" role="tab" aria-selected="true" data-tab="audio">
           АУДИОЗАПИСЬ
         </button>
-        <button class="tab-btn" role="tab" aria-selected="false" data-tab="video">
+        <button class="tab-btn relative bg-transparent border-none text-text-secondary font-mono text-sm font-medium tracking-[0.1em] pb-4 cursor-pointer transition-colors duration-200 hover:text-accent [&.active]:text-accent after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1.5px] after:bg-accent after:origin-right after:scale-x-0 after:transition-transform after:duration-400 [&.active]:after:scale-x-100 [&.active]:after:origin-left [&.active]:after:shadow-[0_0_8px_rgba(200,162,123,0.3)]" role="tab" aria-selected="false" data-tab="video">
           ВИДЕОСЪЕМКА
         </button>
       </div>
 
-      <div class="tabs-content">
+      <div class="relative">
         <!-- Audio Tab Panel -->
         <div class="tab-panel active" id="tab-audio" role="tabpanel">
-          <div class="eq-grid">
-            <div class="eq-info">
-              <h3>Микрофоны студийного стандарта</h3>
-              <p>
+          <div class="grid grid-cols-1 md:grid-cols-[1.1fr_0.9fr] gap-8 md:gap-12 items-center">
+            <div class="flex flex-col gap-4">
+              <h3 class="font-display text-[1.35rem] font-bold uppercase tracking-[-0.01em]">Микрофоны студийного стандарта</h3>
+              <p class="text-[0.95rem] leading-relaxed text-text-secondary">
                 Мы используем легендарные микрофоны <strong>AKG</strong> и <strong>SHURE</strong> — мировые стандарты точности и надежности звука. Их выбирают ведущие подкастеры и музыканты для эфиров и студийных сессий.
               </p>
-              <p>
+              <p class="text-[0.95rem] leading-relaxed text-text-secondary">
                 В связке с ними работает профессиональный аудиоинтерфейс <strong>Steinberg UR22C</strong>, передающий чистые басы, прозрачные высокие частоты и детальный голос без задержек.
               </p>
             </div>
             
-            <div class="eq-spec-list">
-              <div class="spec-item glass">
-                <span class="spec-name">Микрофоны</span>
-                <span class="spec-val">Shure SM7B / AKG C214</span>
+            <div class="flex flex-col gap-3">
+              <div class="rounded bg-glass border border-border backdrop-blur-[20px] px-6 py-4 flex flex-col gap-0.5 transition-all duration-300 hover:border-white/15 hover:shadow-[0_0_12px_rgba(200,162,123,0.05)]">
+                <span class="font-mono text-[0.65rem] uppercase text-accent font-medium tracking-[0.1em]">Микрофоны</span>
+                <span class="text-base font-medium text-text-primary">Shure SM7B / AKG C214</span>
               </div>
-              <div class="spec-item glass">
-                <span class="spec-name">Аудиоинтерфейс</span>
-                <span class="spec-val">Steinberg UR22C</span>
+              <div class="rounded bg-glass border border-border backdrop-blur-[20px] px-6 py-4 flex flex-col gap-0.5 transition-all duration-300 hover:border-white/15 hover:shadow-[0_0_12px_rgba(200,162,123,0.05)]">
+                <span class="font-mono text-[0.65rem] uppercase text-accent font-medium tracking-[0.1em]">Аудиоинтерфейс</span>
+                <span class="text-base font-medium text-text-primary">Steinberg UR22C</span>
               </div>
-              <div class="spec-item glass">
-                <span class="spec-name">Предусиление</span>
-                <span class="spec-val">Cloudlifter CL-1</span>
+              <div class="rounded bg-glass border border-border backdrop-blur-[20px] px-6 py-4 flex flex-col gap-0.5 transition-all duration-300 hover:border-white/15 hover:shadow-[0_0_12px_rgba(200,162,123,0.05)]">
+                <span class="font-mono text-[0.65rem] uppercase text-accent font-medium tracking-[0.1em]">Предусиление</span>
+                <span class="text-base font-medium text-text-primary">Cloudlifter CL-1</span>
               </div>
-              <div class="spec-item glass">
-                <span class="spec-name">Мониторинг</span>
-                <span class="spec-val">Beyerdynamic DT 770 Pro</span>
+              <div class="rounded bg-glass border border-border backdrop-blur-[20px] px-6 py-4 flex flex-col gap-0.5 transition-all duration-300 hover:border-white/15 hover:shadow-[0_0_12px_rgba(200,162,123,0.05)]">
+                <span class="font-mono text-[0.65rem] uppercase text-accent font-medium tracking-[0.1em]">Мониторинг</span>
+                <span class="text-base font-medium text-text-primary">Beyerdynamic DT 770 Pro</span>
               </div>
             </div>
           </div>
         </div>
 
         <!-- Video Tab Panel -->
-        <div class="tab-panel" id="tab-video" role="tabpanel">
-          <div class="eq-grid">
-            <div class="eq-info">
-              <h3>Четкость и глубина картинки</h3>
-              <p>
+        <div class="tab-panel hidden" id="tab-video" role="tabpanel">
+          <div class="grid grid-cols-1 md:grid-cols-[1.1fr_0.9fr] gap-8 md:gap-12 items-center">
+            <div class="flex flex-col gap-4">
+              <h3 class="font-display text-[1.35rem] font-bold uppercase tracking-[-0.01em]">Четкость и глубина картинки</h3>
+              <p class="text-[0.95rem] leading-relaxed text-text-secondary">
                 Для съемки видеоподкастов мы задействуем камеры <strong>Sony A7M3</strong> и <strong>Sony ZV-E10</strong> с качественной оптикой. Это гарантирует сочные цвета, резкую автофокусировку на глазах и красивое размытие фона.
               </p>
-              <p>
+              <p class="text-[0.95rem] leading-relaxed text-text-secondary">
                 Для многокамерной съемки в реальном времени мы используем микшер <strong>AVMATRIX Shark H4 Plus</strong>, позволяющий мгновенно переключать планы, накладывать эффекты и монтировать видео прямо во время эфира.
               </p>
             </div>
 
-            <div class="eq-spec-list">
-              <div class="spec-item glass">
-                <span class="spec-name">Камеры</span>
-                <span class="spec-val">Sony A7M3 (Full Frame) / Sony ZV-E10</span>
+            <div class="flex flex-col gap-3">
+              <div class="rounded bg-glass border border-border backdrop-blur-[20px] px-6 py-4 flex flex-col gap-0.5 transition-all duration-300 hover:border-white/15 hover:shadow-[0_0_12px_rgba(200,162,123,0.05)]">
+                <span class="font-mono text-[0.65rem] uppercase text-accent font-medium tracking-[0.1em]">Камеры</span>
+                <span class="text-base font-medium text-text-primary">Sony A7M3 (Full Frame) / Sony ZV-E10</span>
               </div>
-              <div class="spec-item glass">
-                <span class="spec-name">Оптика</span>
-                <span class="spec-val">Sony FE 24-70mm f/2.8 GM / Sigma 30mm f/1.4</span>
+              <div class="rounded bg-glass border border-border backdrop-blur-[20px] px-6 py-4 flex flex-col gap-0.5 transition-all duration-300 hover:border-white/15 hover:shadow-[0_0_12px_rgba(200,162,123,0.05)]">
+                <span class="font-mono text-[0.65rem] uppercase text-accent font-medium tracking-[0.1em]">Оптика</span>
+                <span class="text-base font-medium text-text-primary">Sony FE 24-70mm f/2.8 GM / Sigma 30mm f/1.4</span>
               </div>
-              <div class="spec-item glass">
-                <span class="spec-name">Видеомикшер</span>
-                <span class="spec-val">AVMATRIX Shark H4 Plus</span>
+              <div class="rounded bg-glass border border-border backdrop-blur-[20px] px-6 py-4 flex flex-col gap-0.5 transition-all duration-300 hover:border-white/15 hover:shadow-[0_0_12px_rgba(200,162,123,0.05)]">
+                <span class="font-mono text-[0.65rem] uppercase text-accent font-medium tracking-[0.1em]">Видеомикшер</span>
+                <span class="text-base font-medium text-text-primary">AVMATRIX Shark H4 Plus</span>
               </div>
-              <div class="spec-item glass">
-                <span class="spec-name">Освещение</span>
-                <span class="spec-val">Aputure Amaran 200d / RGB LED Панели</span>
+              <div class="rounded bg-glass border border-border backdrop-blur-[20px] px-6 py-4 flex flex-col gap-0.5 transition-all duration-300 hover:border-white/15 hover:shadow-[0_0_12px_rgba(200,162,123,0.05)]">
+                <span class="font-mono text-[0.65rem] uppercase text-accent font-medium tracking-[0.1em]">Освещение</span>
+                <span class="text-base font-medium text-text-primary">Aputure Amaran 200d / RGB LED Панели</span>
               </div>
             </div>
           </div>
@@ -111,163 +114,15 @@
 
       tabPanels.forEach(panel => {
         if (panel.id === `tab-${tabId}`) {
+          panel.classList.remove('hidden');
           panel.classList.add('active');
+          panel.style.animation = 'fade-in-up 0.4s ease forwards';
         } else {
+          panel.classList.add('hidden');
           panel.classList.remove('active');
+          panel.style.animation = '';
         }
       });
     });
   });
 </script>
-
-<style>
-  .equipment-section {
-    background-color: var(--color-bg-darkest);
-    border-top: 1px solid var(--color-border);
-    position: relative;
-  }
-
-  .equipment-header {
-    margin-bottom: var(--space-xxl);
-    max-width: 600px;
-  }
-
-  .equipment-sub {
-    font-size: 1.05rem;
-    color: var(--color-text-secondary);
-  }
-
-  .tabs-container {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-xl);
-  }
-
-  .tabs-nav {
-    display: flex;
-    border-bottom: 1px solid var(--color-border);
-    gap: var(--space-xl);
-  }
-
-  .tab-btn {
-    background: transparent;
-    border: none;
-    color: var(--color-text-secondary);
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    padding-bottom: var(--space-md);
-    cursor: pointer;
-    position: relative;
-    transition: color var(--transition-fast);
-  }
-
-  .tab-btn:hover {
-    color: var(--color-accent);
-  }
-
-  .tab-btn::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 1.5px;
-    background-color: var(--color-accent);
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform var(--transition-normal);
-  }
-
-  .tab-btn.active {
-    color: var(--color-accent);
-  }
-
-  .tab-btn.active::after {
-    transform: scaleX(1);
-    transform-origin: left;
-  }
-
-  .tabs-content {
-    position: relative;
-  }
-
-  .tab-panel {
-    display: none;
-  }
-
-  .tab-panel.active {
-    display: block;
-    animation: fadeIn 0.4s ease forwards;
-  }
-
-  .eq-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-xl);
-    align-items: center;
-  }
-
-  .eq-info {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-md);
-  }
-
-  .eq-info h3 {
-    font-family: var(--font-display);
-    font-size: 1.35rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: -0.01em;
-  }
-
-  .eq-info p {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: var(--color-text-secondary);
-  }
-
-  .eq-spec-list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-sm);
-  }
-
-  .spec-item {
-    padding: var(--space-md) var(--space-lg);
-    border-radius: var(--border-radius-md);
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-
-  .spec-name {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    text-transform: uppercase;
-    color: var(--color-accent);
-    font-weight: 500;
-    letter-spacing: 0.1em;
-  }
-
-  .spec-val {
-    font-size: 1.0rem;
-    font-weight: 500;
-    color: var(--color-text-primary);
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* Media Queries */
-  @media (min-width: 768px) {
-    .eq-grid {
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: var(--space-xxl);
-    }
-  }
-</style>

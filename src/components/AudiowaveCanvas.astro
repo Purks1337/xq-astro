@@ -1,6 +1,6 @@
 ---
 ---
-<canvas id="audiowave-canvas" aria-hidden="true"></canvas>
+<canvas id="audiowave-canvas" aria-hidden="true" class="fixed inset-0 w-screen h-screen z-0 pointer-events-none bg-transparent"></canvas>
 
 <script>
   const canvas = document.getElementById('audiowave-canvas') as HTMLCanvasElement;
@@ -115,16 +115,3 @@
     animate();
   }
 </script>
-
-<style>
-  #audiowave-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 0;
-    pointer-events: none;
-    background-color: transparent;
-  }
-</style>

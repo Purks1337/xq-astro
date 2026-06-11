@@ -10,54 +10,61 @@ const {
 } = Astro.props;
 ---
 
-<section class="hero-section">
-  <div class="container hero-container">
+<section class="relative min-h-screen flex items-center justify-center pt-[150px] pb-12 overflow-hidden">
+  <!-- Glow Blobs -->
+  <div class="absolute -top-32 -right-32 w-[28rem] h-[28rem] bg-glow-amber rounded-full blur-3xl animate-glow-pulse pointer-events-none"></div>
+  <div class="absolute top-1/2 -left-40 w-80 h-80 bg-glow-violet rounded-full blur-3xl animate-float pointer-events-none"></div>
+  <div class="absolute bottom-20 right-1/4 w-60 h-60 bg-glow-cyan rounded-full blur-3xl animate-float-slow pointer-events-none"></div>
+
+  <div class="w-full max-w-[1200px] mx-auto px-8 flex flex-col gap-12">
     
     <!-- Asymmetric Offset Typography Layout -->
-    <div class="hero-grid">
-      <div class="hero-col-left">
-        <span class="eyebrow">СТУДИЯ ВИДЕОПРОДАКШНА //</span>
-        <h1 class="hero-title">{title}</h1>
+    <div class="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-8 lg:gap-12 items-start text-left z-10">
+      <div class="flex flex-col" data-reveal>
+        <span class="font-mono text-[0.7rem] font-normal tracking-[0.15em] text-accent inline-flex items-center gap-2 mb-4 uppercase before:content-['//'] before:text-text-muted">СТУДИЯ ВИДЕОПРОДАКШНА //</span>
+        <h1 class="text-[clamp(2.6rem,7vw,5.2rem)] font-extrabold leading-[0.95] uppercase tracking-[-0.03em] text-text-primary">{title}</h1>
       </div>
       
-      <div class="hero-col-right">
-        <p class="hero-desc">{subtitle}</p>
-        <div class="hero-ctas">
-          <a href="#contact" class="btn btn-primary">Оценить проект</a>
-          <a href="#portfolio" class="btn btn-secondary">Наши работы</a>
+      <div class="flex flex-col gap-6 justify-end" data-reveal data-reveal-delay="2">
+        <p class="text-[clamp(1rem,1.4vw,1.15rem)] leading-relaxed text-text-secondary max-w-[540px]">{subtitle}</p>
+        <div class="flex gap-4 max-md:flex-col max-md:w-full">
+          <a href="#contact" class="inline-flex items-center justify-center px-6 py-3 font-display text-[0.78rem] font-bold uppercase tracking-[0.1em] rounded-sm bg-white text-bg-darkest transition-all duration-400 hover:bg-primary-hover hover:-translate-y-0.5 hover:shadow-[0_0_30px_rgba(255,255,255,0.15)]">Оценить проект</a>
+          <a href="#portfolio" class="inline-flex items-center justify-center px-6 py-3 font-display text-[0.78rem] font-bold uppercase tracking-[0.1em] rounded-sm border border-border text-text-primary bg-transparent transition-all duration-400 hover:border-white hover:bg-white/[0.03]">Наши работы</a>
         </div>
       </div>
     </div>
 
     <!-- Cinematic Monitor Viewport -->
-    <div class="cinematic-viewport-wrapper">
-      <div class="camera-hud">
-        <span class="hud-corner top-left"></span>
-        <span class="hud-corner top-right"></span>
-        <span class="hud-corner bottom-left"></span>
-        <span class="hud-corner bottom-right"></span>
+    <div class="w-full z-10 mt-4" data-reveal data-reveal-delay="3">
+      <div class="relative w-full aspect-[21/9] max-md:aspect-video border border-border p-6 max-md:p-3 bg-[rgba(12,14,18,0.4)] shadow-[0_16px_48px_rgba(0,0,0,0.9)] group transition-all duration-500 hover:border-border-hover hover:shadow-[0_16px_64px_rgba(200,162,123,0.08)]">
+        <span class="absolute top-1.5 left-1.5 w-3 h-3 border-l border-t border-white/20 transition-all duration-400 group-hover:border-white group-hover:w-[18px] group-hover:h-[18px]"></span>
+        <span class="absolute top-1.5 right-1.5 w-3 h-3 border-r border-t border-white/20 transition-all duration-400 group-hover:border-white group-hover:w-[18px] group-hover:h-[18px]"></span>
+        <span class="absolute bottom-1.5 left-1.5 w-3 h-3 border-l border-b border-white/20 transition-all duration-400 group-hover:border-white group-hover:w-[18px] group-hover:h-[18px]"></span>
+        <span class="absolute bottom-1.5 right-1.5 w-3 h-3 border-r border-b border-white/20 transition-all duration-400 group-hover:border-white group-hover:w-[18px] group-hover:h-[18px]"></span>
         
-        <div class="hud-bar top-bar">
-          <span class="hud-rec"><span class="rec-dot"></span>ГОТОВНОСТЬ</span>
-          <span class="hud-ratio">21:9 ШИРОКИЙ ФОРМАТ</span>
+        <div class="absolute top-2.5 left-6 right-6 flex justify-between font-mono text-[0.65rem] text-text-muted tracking-[0.1em] z-5 max-md:hidden">
+          <span class="flex items-center gap-1.5 text-text-primary">
+            <span class="w-1.5 h-1.5 bg-red-500 rounded-full animate-flash"></span>ГОТОВНОСТЬ
+          </span>
+          <span>21:9 ШИРОКИЙ ФОРМАТ</span>
         </div>
         
-        <div class="hud-bar bottom-bar">
-          <span class="hud-fps">24 КАДРА/С</span>
-          <span class="hud-tc">00:00:00:00</span>
+        <div class="absolute bottom-2.5 left-6 right-6 flex justify-between font-mono text-[0.65rem] text-text-muted tracking-[0.1em] z-5 max-md:hidden">
+          <span>24 КАДРА/С</span>
+          <span>00:00:00:00</span>
         </div>
 
-        <div class="viewport-content" data-video-src="https://kinescope.io/embed/placeholder-showreel">
-          <div class="poster-media">
-            <div class="grid-overlay"></div>
-            <div class="center-target"></div>
+        <div class="w-full h-full relative cursor-pointer overflow-hidden bg-bg-darkest" data-video-src="https://kinescope.io/embed/placeholder-showreel">
+          <div class="w-full h-full opacity-20 transition-all duration-800 group-hover:scale-[1.02] group-hover:opacity-35">
+            <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:33.33%_33.33%]"></div>
+            <div class="absolute top-1/2 left-1/2 w-3 h-3 border border-white/15 rounded-full -translate-x-1/2 -translate-y-1/2 before:absolute before:top-1/2 before:-left-1.5 before:w-6 before:h-px before:bg-white/15 after:absolute after:left-1/2 after:-top-1.5 after:w-px after:h-6 after:bg-white/15"></div>
           </div>
-          <div class="viewport-overlay">
-            <div class="custom-play-btn">
-              <span class="play-arrow">
+          <div class="absolute inset-0 flex items-center justify-center bg-[radial-gradient(circle,rgba(0,0,0,0.2)_0%,rgba(0,0,0,0.7)_100%)] z-4">
+            <div class="flex items-center gap-4 px-8 py-4 bg-[rgba(7,9,12,0.8)] border border-border backdrop-blur-[10px] transition-all duration-400 group-hover:border-white group-hover:bg-white group-hover:shadow-[0_0_40px_rgba(255,255,255,0.15)]">
+              <span class="text-white flex items-center justify-center transition-transform duration-400 group-hover:text-bg-darkest group-hover:scale-110">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3" /></svg>
               </span>
-              <span class="play-label">СМОТРЕТЬ ШОУРИЛ //</span>
+              <span class="font-mono text-[0.72rem] font-medium tracking-[0.1em] text-text-primary group-hover:text-bg-darkest">СМОТРЕТЬ ШОУРИЛ //</span>
             </div>
           </div>
         </div>
@@ -66,263 +73,3 @@ const {
 
   </div>
 </section>
-
-<style>
-  .hero-section {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-top: 150px;
-    padding-bottom: var(--space-xxl);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero-container {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-xxl);
-  }
-
-  /* Asymmetric Offset Grid */
-  .hero-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-xl);
-    align-items: flex-start;
-    text-align: left;
-    z-index: 10;
-  }
-
-  .hero-col-left {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .hero-title {
-    font-size: clamp(2.6rem, 7vw, 5.2rem);
-    font-weight: 800;
-    line-height: 0.95;
-    text-transform: uppercase;
-    letter-spacing: -0.03em;
-    color: var(--color-text-primary);
-  }
-
-  .hero-col-right {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-lg);
-    justify-content: flex-end;
-  }
-
-  .hero-desc {
-    font-size: clamp(1.0rem, 1.4vw, 1.15rem);
-    line-height: 1.6;
-    color: var(--color-text-secondary);
-    max-width: 540px;
-  }
-
-  .hero-ctas {
-    display: flex;
-    gap: var(--space-md);
-  }
-
-  .hero-ctas .btn {
-    padding: 0.8rem 1.6rem;
-    font-size: 0.78rem;
-  }
-
-  /* Cinematic Monitor Viewport */
-  .cinematic-viewport-wrapper {
-    width: 100%;
-    z-index: 10;
-    margin-top: var(--space-md);
-  }
-
-  .camera-hud {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 21 / 9;
-    border: 1px solid var(--color-border);
-    padding: 24px;
-    background-color: rgba(12, 14, 18, 0.4);
-    box-shadow: var(--shadow-md);
-  }
-
-  .hud-corner {
-    position: absolute;
-    width: 12px;
-    height: 12px;
-    border-color: rgba(255, 255, 255, 0.2);
-    border-style: solid;
-    transition: all var(--transition-normal);
-  }
-
-  .camera-hud:hover .hud-corner {
-    border-color: var(--color-primary);
-    width: 18px;
-    height: 18px;
-  }
-
-  .top-left { top: 6px; left: 6px; border-width: 1px 0 0 1px; }
-  .top-right { top: 6px; right: 6px; border-width: 1px 1px 0 0; }
-  .bottom-left { bottom: 6px; left: 6px; border-width: 0 0 1px 1px; }
-  .bottom-right { bottom: 6px; right: 6px; border-width: 0 1px 1px 0; }
-
-  .hud-bar {
-    position: absolute;
-    width: calc(100% - 48px);
-    display: flex;
-    justify-content: space-between;
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    color: var(--color-text-muted);
-    letter-spacing: 0.1em;
-    z-index: 5;
-  }
-
-  .top-bar { top: 10px; }
-  .bottom-bar { bottom: 10px; }
-
-  .hud-rec {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    color: var(--color-text-primary);
-  }
-
-  .rec-dot {
-    width: 6px;
-    height: 6px;
-    background-color: #ef4444;
-    border-radius: 50%;
-    animation: flash 1.5s infinite;
-  }
-
-  .viewport-content {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    cursor: pointer;
-    overflow: hidden;
-    background-color: #07090c;
-  }
-
-  .poster-media {
-    width: 100%;
-    height: 100%;
-    opacity: 0.2;
-    transition: all var(--transition-slow);
-  }
-
-  .grid-overlay {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background-image: 
-      linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-    background-size: 33.33% 33.33%;
-  }
-
-  .center-target {
-    position: absolute;
-    top: 50%; left: 50%; width: 12px; height: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  .center-target::before, .center-target::after {
-    content: '';
-    position: absolute;
-    background-color: rgba(255, 255, 255, 0.15);
-  }
-  .center-target::before { top: 50%; left: -6px; width: 24px; height: 1px; }
-  .center-target::after { left: 50%; top: -6px; width: 1px; height: 24px; }
-
-  .viewport-overlay {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: radial-gradient(circle, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.7) 100%);
-    z-index: 4;
-  }
-
-  .custom-play-btn {
-    display: flex;
-    align-items: center;
-    gap: var(--space-md);
-    padding: var(--space-md) var(--space-xl);
-    background-color: rgba(7, 9, 12, 0.8);
-    border: 1px solid var(--color-border);
-    backdrop-filter: blur(10px);
-    transition: all var(--transition-normal);
-  }
-
-  .play-arrow {
-    color: var(--color-primary);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform var(--transition-normal);
-  }
-
-  .play-label {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    color: var(--color-text-primary);
-  }
-
-  /* Hover Animations */
-  .viewport-content:hover .poster-media {
-    transform: scale(1.02);
-    opacity: 0.35;
-  }
-
-  .viewport-content:hover .custom-play-btn {
-    border-color: var(--color-primary);
-    background-color: var(--color-primary);
-    box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
-  }
-
-  .viewport-content:hover .play-arrow {
-    color: #07090c;
-    transform: scale(1.1);
-  }
-
-  .viewport-content:hover .play-label {
-    color: #07090c;
-  }
-
-  @keyframes flash {
-    0%, 100% { opacity: 0.3; }
-    50% { opacity: 1; }
-  }
-
-  /* Media Queries */
-  @media (min-width: 1024px) {
-    .hero-grid {
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: var(--space-xxl);
-    }
-  }
-
-  @media (max-width: 767px) {
-    .camera-hud {
-      aspect-ratio: 16 / 9;
-      padding: 12px;
-    }
-    .hud-bar {
-      display: none;
-    }
-    .hero-ctas {
-      flex-direction: column;
-      width: 100%;
-    }
-  }
-</style>

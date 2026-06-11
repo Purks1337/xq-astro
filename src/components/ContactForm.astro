@@ -10,129 +10,135 @@ const {
 } = Astro.props;
 ---
 
-<section class="section contact-section" id="contact">
-  <div class="container">
-    <div class="contact-grid">
+<section class="relative py-[clamp(5rem,9vw,9rem)] bg-bg-darkest border-t border-border z-10" id="contact">
+  <!-- Glow decorations -->
+  <div class="absolute top-20 -right-32 w-72 h-72 bg-glow-amber rounded-full blur-3xl animate-glow-pulse pointer-events-none"></div>
+  <div class="absolute bottom-20 -left-24 w-56 h-56 bg-glow-violet rounded-full blur-3xl animate-float pointer-events-none"></div>
+
+  <div class="w-full max-w-[1200px] mx-auto px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-12 items-start">
       
       <!-- Left Info Block -->
-      <div class="contact-info-block">
-        <span class="eyebrow">СВЯЗАТЬСЯ //</span>
+      <div class="flex flex-col gap-4" data-reveal>
+        <span class="font-mono text-[0.7rem] font-normal tracking-[0.15em] text-accent inline-flex items-center gap-2 mb-4 uppercase before:content-['//'] before:text-text-muted">СВЯЗАТЬСЯ //</span>
         <h2>Давайте создавать вместе</h2>
-        <p class="contact-lead">
+        <p class="text-[1.05rem] leading-[1.7] text-text-secondary max-w-[480px]">
           Мы открыты для съемок, записи подкастов и проектов любой сложности. Напишите нам, чтобы обсудить детали и составить смету.
         </p>
 
-        <div class="contact-details">
-          <div class="detail-row">
-            <span class="detail-label">Адрес студии</span>
-            <span class="detail-val">Екатеринбург, ул. Ботаническая 19</span>
+        <div class="flex flex-col gap-6 mt-4">
+          <div class="flex flex-col gap-0.5">
+            <span class="font-mono text-[0.65rem] text-text-muted uppercase tracking-[0.1em]">Адрес студии</span>
+            <span class="text-lg font-medium text-text-primary">Екатеринбург, ул. Ботаническая 19</span>
           </div>
-          <div class="detail-row">
-            <span class="detail-label">Телефон</span>
-            <a href="tel:+79923410520" class="detail-val">+7 992 341-05-20</a>
+          <div class="flex flex-col gap-0.5">
+            <span class="font-mono text-[0.65rem] text-text-muted uppercase tracking-[0.1em]">Телефон</span>
+            <a href="tel:+79923410520" class="text-lg font-medium text-text-primary hover:text-accent transition-colors duration-200">+7 992 341-05-20</a>
           </div>
-          <div class="detail-row">
-            <span class="detail-label">Email</span>
-            <a href="mailto:hvaliteq@gmail.com" class="detail-val">hvaliteq@gmail.com</a>
+          <div class="flex flex-col gap-0.5">
+            <span class="font-mono text-[0.65rem] text-text-muted uppercase tracking-[0.1em]">Email</span>
+            <a href="mailto:hvaliteq@gmail.com" class="text-lg font-medium text-text-primary hover:text-accent transition-colors duration-200">hvaliteq@gmail.com</a>
           </div>
         </div>
       </div>
 
-      <!-- Traditional Redesigned Form Block -->
-      <div class="contact-form-block glass" id="form-container">
-        <h3>{title}</h3>
-        <p class="form-desc">{subtitle}</p>
+      <!-- Form Block -->
+      <div class="relative rounded bg-glass border border-border backdrop-blur-[20px] p-8 lg:p-12 overflow-hidden shadow-[0_16px_48px_rgba(0,0,0,0.9)]" id="form-container" data-reveal data-reveal-delay="2">
+        <!-- Inner glow -->
+        <div class="absolute -top-20 -right-20 w-40 h-40 bg-glow-amber rounded-full blur-3xl opacity-50 pointer-events-none"></div>
 
-        <form id="project-form" class="project-form" novalidate>
+        <h3 class="text-2xl mb-1 tracking-[-0.01em]">{title}</h3>
+        <p class="text-sm text-text-secondary mb-8 leading-relaxed">{subtitle}</p>
+
+        <form id="project-form" class="flex flex-col gap-6" novalidate>
           
           <!-- Category Selector Pills -->
-          <div class="form-group">
-            <span class="form-label-mono">Выбрать формат //</span>
-            <div class="format-pills" role="group" aria-label="Формат проекта">
-              <button type="button" class="pill-btn active" data-value="видеопроизводство">Видеопроизводство</button>
-              <button type="button" class="pill-btn" data-value="студия подкастов">Студия подкастов</button>
-              <button type="button" class="pill-btn" data-value="реклама и клипы">Реклама & Клипы</button>
-              <button type="button" class="pill-btn" data-value="монтаж и графика">Монтаж & Графика</button>
+          <div>
+            <span class="block font-mono text-[0.7rem] uppercase tracking-[0.08em] text-text-secondary mb-2">Выбрать формат //</span>
+            <div class="flex flex-wrap gap-2 mt-2" role="group" aria-label="Формат проекта">
+              <button type="button" class="pill-btn active bg-transparent border border-border rounded-sm text-text-secondary font-body text-[0.8rem] font-medium px-4 py-1.5 cursor-pointer transition-all duration-200 hover:border-white hover:text-white [&.active]:border-white [&.active]:text-white [&.active]:bg-white/5 [&.active]:shadow-[0_0_12px_rgba(255,255,255,0.06)]" data-value="видеопроизводство">Видеопроизводство</button>
+              <button type="button" class="pill-btn bg-transparent border border-border rounded-sm text-text-secondary font-body text-[0.8rem] font-medium px-4 py-1.5 cursor-pointer transition-all duration-200 hover:border-white hover:text-white [&.active]:border-white [&.active]:text-white [&.active]:bg-white/5 [&.active]:shadow-[0_0_12px_rgba(255,255,255,0.06)]" data-value="студия подкастов">Студия подкастов</button>
+              <button type="button" class="pill-btn bg-transparent border border-border rounded-sm text-text-secondary font-body text-[0.8rem] font-medium px-4 py-1.5 cursor-pointer transition-all duration-200 hover:border-white hover:text-white [&.active]:border-white [&.active]:text-white [&.active]:bg-white/5 [&.active]:shadow-[0_0_12px_rgba(255,255,255,0.06)]" data-value="реклама и клипы">Реклама & Клипы</button>
+              <button type="button" class="pill-btn bg-transparent border border-border rounded-sm text-text-secondary font-body text-[0.8rem] font-medium px-4 py-1.5 cursor-pointer transition-all duration-200 hover:border-white hover:text-white [&.active]:border-white [&.active]:text-white [&.active]:bg-white/5 [&.active]:shadow-[0_0_12px_rgba(255,255,255,0.06)]" data-value="монтаж и графика">Монтаж & Графика</button>
             </div>
-            <!-- Hidden input to hold chosen format value -->
             <input type="hidden" name="project_format" id="format-hidden-input" value="видеопроизводство" />
           </div>
 
-          <!-- Structured Form Fields -->
-          <div class="form-fields-grid">
-            <div class="form-group">
-              <label for="name-input" class="form-label-mono">01 // Ваше имя</label>
+          <!-- Form Fields -->
+          <div class="flex flex-col gap-4">
+            <div>
+              <label for="name-input" class="block font-mono text-[0.7rem] uppercase tracking-[0.08em] text-text-secondary mb-2">01 // Ваше имя</label>
               <input 
                 type="text" 
                 id="name-input" 
                 name="name" 
-                class="form-input" 
+                class="w-full bg-bg-darkest border border-border rounded-sm px-4 py-3.5 text-text-primary font-body text-[0.95rem] font-normal transition-all duration-400 placeholder:text-text-muted focus:outline-none focus:border-white focus:bg-white/[0.01] focus:shadow-[0_0_16px_rgba(255,255,255,0.04)] [&.invalid]:border-red-500 [&.invalid]:bg-red-500/[0.02]" 
                 placeholder="Иван Иванов" 
                 required 
               />
-              <span class="error-msg" id="name-error">Пожалуйста, укажите имя</span>
+              <span class="error-msg hidden text-[0.72rem] text-red-500 mt-1 font-mono" id="name-error">Пожалуйста, укажите имя</span>
             </div>
 
-            <div class="form-group">
-              <label for="phone-input" class="form-label-mono">02 // Номер телефона</label>
+            <div>
+              <label for="phone-input" class="block font-mono text-[0.7rem] uppercase tracking-[0.08em] text-text-secondary mb-2">02 // Номер телефона</label>
               <input 
                 type="tel" 
                 id="phone-input" 
                 name="phone" 
-                class="form-input" 
+                class="w-full bg-bg-darkest border border-border rounded-sm px-4 py-3.5 text-text-primary font-body text-[0.95rem] font-normal transition-all duration-400 placeholder:text-text-muted focus:outline-none focus:border-white focus:bg-white/[0.01] focus:shadow-[0_0_16px_rgba(255,255,255,0.04)] [&.invalid]:border-red-500 [&.invalid]:bg-red-500/[0.02]" 
                 placeholder="+7 (999) 000-00-00" 
                 required 
               />
-              <span class="error-msg" id="phone-error">Введите корректный номер телефона</span>
+              <span class="error-msg hidden text-[0.72rem] text-red-500 mt-1 font-mono" id="phone-error">Введите корректный номер телефона</span>
             </div>
 
-            <div class="form-group">
-              <label for="email-input" class="form-label-mono">03 // Электронная почта</label>
+            <div>
+              <label for="email-input" class="block font-mono text-[0.7rem] uppercase tracking-[0.08em] text-text-secondary mb-2">03 // Электронная почта</label>
               <input 
                 type="email" 
                 id="email-input" 
                 name="email" 
-                class="form-input" 
+                class="w-full bg-bg-darkest border border-border rounded-sm px-4 py-3.5 text-text-primary font-body text-[0.95rem] font-normal transition-all duration-400 placeholder:text-text-muted focus:outline-none focus:border-white focus:bg-white/[0.01] focus:shadow-[0_0_16px_rgba(255,255,255,0.04)] [&.invalid]:border-red-500 [&.invalid]:bg-red-500/[0.02]" 
                 placeholder="ivan@example.ru" 
                 required 
               />
-              <span class="error-msg" id="email-error">Введите корректный адрес почты</span>
+              <span class="error-msg hidden text-[0.72rem] text-red-500 mt-1 font-mono" id="email-error">Введите корректный адрес почты</span>
             </div>
 
-            <div class="form-group">
-              <label for="message-textarea" class="form-label-mono">04 // Описание проекта</label>
+            <div>
+              <label for="message-textarea" class="block font-mono text-[0.7rem] uppercase tracking-[0.08em] text-text-secondary mb-2">04 // Описание проекта</label>
               <textarea 
                 id="message-textarea" 
                 name="message" 
-                class="form-textarea" 
+                class="w-full bg-bg-darkest border border-border rounded-sm px-4 py-3.5 text-text-primary font-body text-[0.95rem] font-normal resize-y transition-all duration-400 placeholder:text-text-muted focus:outline-none focus:border-white focus:bg-white/[0.01] focus:shadow-[0_0_16px_rgba(255,255,255,0.04)]" 
                 placeholder="Расскажите о вашей задаче, хронометраже, целях съемок..." 
                 rows="3"
               ></textarea>
             </div>
           </div>
 
-          <div class="form-agreement">
-            <label class="checkbox-label">
-              <input type="checkbox" id="agreement-checkbox" name="agreement" required />
-              <span class="checkbox-text">Я согласен с <a href="/privacy" target="_blank" class="accent-link">политикой конфиденциальности</a></span>
+          <div class="mt-2">
+            <label class="flex items-start gap-3 cursor-pointer">
+              <input type="checkbox" id="agreement-checkbox" name="agreement" required class="mt-1" />
+              <span class="text-[0.82rem] text-text-secondary leading-snug">Я согласен с <a href="/privacy" target="_blank" class="text-white underline hover:text-accent transition-colors duration-200">политикой конфиденциальности</a></span>
             </label>
-            <span class="error-msg" id="agreement-error">Необходимо ваше согласие</span>
+            <span class="error-msg hidden text-[0.72rem] text-red-500 mt-1 font-mono" id="agreement-error">Необходимо ваше согласие</span>
           </div>
 
-          <button type="submit" class="btn btn-primary submit-btn">
+          <button type="submit" class="self-start inline-flex items-center justify-center px-8 py-3.5 font-display text-[0.78rem] font-bold uppercase tracking-[0.1em] rounded-sm bg-white text-bg-darkest transition-all duration-400 hover:bg-primary-hover hover:-translate-y-0.5 hover:shadow-[0_0_30px_rgba(255,255,255,0.15)] cursor-pointer">
             ОТПРАВИТЬ ЗАЯВКУ //
           </button>
         </form>
 
         <!-- Success Screen Overlay -->
-        <div class="success-overlay" id="success-overlay">
-          <div class="success-content">
-            <div class="success-icon">
+        <div class="absolute inset-0 bg-bg-card z-20 flex items-center justify-center p-8 text-center opacity-0 invisible transition-all duration-400 [&.active]:opacity-100 [&.active]:visible" id="success-overlay">
+          <div class="flex flex-col items-center gap-4 max-w-[380px]">
+            <div class="w-14 h-14 rounded-full bg-white/[0.03] text-white flex items-center justify-center border border-white shadow-[0_0_24px_rgba(255,255,255,0.1)]">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
             </div>
-            <h4>Заявка успешно отправлена!</h4>
-            <p>Мы получили вашу информацию и свяжемся с вами в течение часа для детального обсуждения.</p>
-            <button id="reset-form-btn" class="btn btn-secondary btn-sm">Отправить еще раз</button>
+            <h4 class="text-xl font-bold">Заявка успешно отправлена!</h4>
+            <p class="text-sm text-text-secondary leading-relaxed">Мы получили вашу информацию и свяжемся с вами в течение часа для детального обсуждения.</p>
+            <button id="reset-form-btn" class="inline-flex items-center justify-center px-6 py-2.5 font-display text-xs font-bold uppercase tracking-[0.1em] rounded-sm border border-border text-text-primary bg-transparent transition-all duration-400 hover:border-white hover:bg-white/[0.03] cursor-pointer">Отправить еще раз</button>
           </div>
         </div>
 
@@ -170,10 +176,12 @@ const {
 
     if (!isValid) {
       input.classList.add('invalid');
-      errorEl?.classList.add('show');
+      errorEl?.classList.remove('hidden');
+      errorEl?.classList.add('block');
     } else {
       input.classList.remove('invalid');
-      errorEl?.classList.remove('show');
+      errorEl?.classList.add('hidden');
+      errorEl?.classList.remove('block');
     }
     return isValid;
   }
@@ -184,9 +192,11 @@ const {
   agreement?.addEventListener('change', () => {
     const err = document.getElementById('agreement-error');
     if (agreement.checked) {
-      err?.classList.remove('show');
+      err?.classList.add('hidden');
+      err?.classList.remove('block');
     } else {
-      err?.classList.add('show');
+      err?.classList.remove('hidden');
+      err?.classList.add('block');
     }
   });
 
@@ -200,9 +210,11 @@ const {
     const isAgreementValid = agreement.checked;
     const agreementError = document.getElementById('agreement-error');
     if (!isAgreementValid) {
-      agreementError?.classList.add('show');
+      agreementError?.classList.remove('hidden');
+      agreementError?.classList.add('block');
     } else {
-      agreementError?.classList.remove('show');
+      agreementError?.classList.add('hidden');
+      agreementError?.classList.remove('block');
     }
 
     if (isNameValid && isPhoneValid && isEmailValid && isAgreementValid) {
@@ -220,8 +232,11 @@ const {
     successOverlay?.classList.remove('active');
     
     // Clear validation styles
-    document.querySelectorAll('.form-input').forEach(el => el.classList.remove('invalid'));
-    document.querySelectorAll('.error-msg').forEach(el => el.classList.remove('show'));
+    document.querySelectorAll('input.invalid').forEach(el => el.classList.remove('invalid'));
+    document.querySelectorAll('.error-msg').forEach(el => {
+      el.classList.add('hidden');
+      el.classList.remove('block');
+    });
     
     // Reset format pills
     pillBtns.forEach(b => b.classList.remove('active'));
@@ -231,294 +246,3 @@ const {
     }
   });
 </script>
-
-<style>
-  .contact-section {
-    background-color: var(--color-bg-darkest);
-    border-top: 1px solid var(--color-border);
-    position: relative;
-  }
-
-  .contact-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-xxl);
-    align-items: flex-start;
-  }
-
-  .contact-info-block {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-md);
-  }
-
-  .contact-lead {
-    font-size: 1.05rem;
-    line-height: 1.7;
-    color: var(--color-text-secondary);
-    max-width: 480px;
-  }
-
-  .contact-details {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-lg);
-    margin-top: var(--space-md);
-  }
-
-  .detail-row {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-
-  .detail-label {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    color: var(--color-text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-  }
-
-  .detail-val {
-    font-size: 1.15rem;
-    font-weight: 500;
-    color: var(--color-text-primary);
-  }
-
-  .detail-val:hover {
-    color: var(--color-accent);
-  }
-
-  /* Traditional structured Form style */
-  .contact-form-block {
-    position: relative;
-    border-radius: var(--border-radius-md);
-    padding: var(--space-xl);
-    overflow: hidden;
-    box-shadow: var(--shadow-md);
-  }
-
-  .contact-form-block h3 {
-    font-size: 1.5rem;
-    margin-bottom: var(--space-xxs);
-    letter-spacing: -0.01em;
-  }
-
-  .form-desc {
-    font-size: 0.88rem;
-    color: var(--color-text-secondary);
-    margin-bottom: var(--space-xl);
-    line-height: 1.5;
-  }
-
-  .project-form {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-lg);
-  }
-
-  .form-label-mono {
-    display: block;
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--color-text-secondary);
-    margin-bottom: var(--space-xs);
-  }
-
-  /* Format Pills */
-  .format-pills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-xs);
-    margin-top: var(--space-xs);
-  }
-
-  .pill-btn {
-    background: transparent;
-    border: 1px solid var(--color-border);
-    border-radius: var(--border-radius-sm);
-    color: var(--color-text-secondary);
-    font-family: var(--font-body);
-    font-size: 0.8rem;
-    font-weight: 500;
-    padding: 0.4rem 1.0rem;
-    cursor: pointer;
-    transition: all var(--transition-fast);
-  }
-
-  .pill-btn:hover {
-    border-color: var(--color-primary);
-    color: var(--color-primary);
-  }
-
-  .pill-btn.active {
-    border-color: var(--color-primary);
-    color: var(--color-primary);
-    background-color: rgba(255, 255, 255, 0.05);
-  }
-
-  /* Fields Layout Grid */
-  .form-fields-grid {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-md);
-  }
-
-  .form-input {
-    width: 100%;
-    background: var(--color-bg-darkest);
-    border: 1px solid var(--color-border);
-    border-radius: var(--border-radius-sm);
-    padding: 0.85rem 1.0rem;
-    color: var(--color-text-primary);
-    font-family: var(--font-body);
-    font-size: 0.95rem;
-    font-weight: 400;
-    transition: all var(--transition-normal);
-  }
-
-  .form-input::placeholder {
-    color: var(--color-text-muted);
-  }
-
-  .form-input:focus {
-    outline: none;
-    border-color: var(--color-primary);
-    background: rgba(255, 255, 255, 0.01);
-  }
-
-  .form-input.invalid {
-    border-color: #ef4444;
-    background: rgba(239, 68, 68, 0.02);
-  }
-
-  .form-textarea {
-    width: 100%;
-    background: var(--color-bg-darkest);
-    border: 1px solid var(--color-border);
-    border-radius: var(--border-radius-sm);
-    padding: 0.85rem 1.0rem;
-    color: var(--color-text-primary);
-    font-family: var(--font-body);
-    font-size: 0.95rem;
-    font-weight: 400;
-    resize: vertical;
-    transition: all var(--transition-normal);
-  }
-
-  .form-textarea:focus {
-    outline: none;
-    border-color: var(--color-primary);
-    background: rgba(255, 255, 255, 0.01);
-  }
-
-  .error-msg {
-    display: none;
-    font-size: 0.72rem;
-    color: #ef4444;
-    margin-top: 4px;
-    font-family: var(--font-mono);
-  }
-
-  .error-msg.show {
-    display: block;
-  }
-
-  .form-agreement {
-    margin-top: var(--space-xs);
-  }
-
-  .checkbox-label {
-    display: flex;
-    align-items: flex-start;
-    gap: var(--space-sm);
-    cursor: pointer;
-  }
-
-  .checkbox-label input {
-    margin-top: 0.3rem;
-  }
-
-  .checkbox-text {
-    font-size: 0.82rem;
-    color: var(--color-text-secondary);
-    line-height: 1.4;
-  }
-
-  .accent-link {
-    color: var(--color-primary);
-    text-decoration: underline;
-  }
-
-  .submit-btn {
-    align-self: flex-start;
-    padding: 0.85rem 2.0rem;
-    font-size: 0.78rem;
-  }
-
-  /* Success screen style */
-  .success-overlay {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background-color: var(--color-bg-card);
-    z-index: 20;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: var(--space-xl);
-    text-align: center;
-    opacity: 0;
-    visibility: hidden;
-    transition: all var(--transition-normal);
-  }
-
-  .success-overlay.active {
-    opacity: 1;
-    visibility: visible;
-  }
-
-  .success-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--space-md);
-    max-width: 380px;
-  }
-
-  .success-icon {
-    width: 54px;
-    height: 54px;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.03);
-    color: var(--color-primary);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid var(--color-primary);
-  }
-
-  .success-content h4 {
-    font-size: 1.35rem;
-    font-weight: 700;
-  }
-
-  .success-content p {
-    font-size: 0.9rem;
-    color: var(--color-text-secondary);
-    line-height: 1.6;
-  }
-
-  /* Media Queries */
-  @media (min-width: 1024px) {
-    .contact-grid {
-      grid-template-columns: 0.8fr 1.2fr;
-      gap: var(--space-xxl);
-    }
-    .contact-form-block {
-      padding: var(--space-xxl);
-    }
-  }
-</style>

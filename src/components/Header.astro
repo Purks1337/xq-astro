@@ -4,64 +4,92 @@ const isHome = pathname === '/' || pathname === '/index.html';
 const isPodcast = pathname.startsWith('/podcast');
 ---
 
-<header class="main-header" id="main-header">
-  <div class="container header-container">
-    <a href="/" class="logo" aria-label="Quality Media Главная">
-      <img src="/images/logo.svg" alt="Quality Media Логотип" width="130" height="22" />
+<header class="fixed top-0 left-0 w-full z-100 py-6 border-b border-transparent transition-all duration-400 ease-[cubic-bezier(0.25,1,0.5,1)]" id="main-header">
+  <div class="w-full max-w-[1200px] mx-auto px-8 flex items-center justify-between">
+    <a href="/" class="flex items-center z-110" aria-label="Quality Media Главная">
+      <img src="/images/logo.svg" alt="Quality Media Логотип" width="130" height="22" class="brightness-[0.98]" />
     </a>
 
-    <nav class="desktop-nav" aria-label="Основная навигация">
-      <ul class="nav-links">
+    <nav class="hidden lg:block" aria-label="Основная навигация">
+      <ul class="flex list-none gap-8">
         <li>
-          <a href="/" class:list={['nav-link', { active: isHome }]}>
-            <span class="dot-indicator"></span>
+          <a href="/" class:list={[
+            'font-mono text-xs font-normal tracking-[0.15em] inline-flex items-center gap-1.5 py-2 transition-colors duration-200',
+            isHome ? 'text-text-primary' : 'text-text-secondary hover:text-text-primary'
+          ]}>
+            <span class:list={[
+              'w-1 h-1 rounded-full bg-white transition-all duration-200',
+              isHome ? 'opacity-100 scale-100 shadow-[0_0_6px_var(--color-primary)]' : 'opacity-0 scale-50'
+            ]}></span>
             ВИДЕО
           </a>
         </li>
         <li>
-          <a href="/podcast" class:list={['nav-link', { active: isPodcast }]}>
-            <span class="dot-indicator"></span>
+          <a href="/podcast" class:list={[
+            'font-mono text-xs font-normal tracking-[0.15em] inline-flex items-center gap-1.5 py-2 transition-colors duration-200',
+            isPodcast ? 'text-text-primary' : 'text-text-secondary hover:text-text-primary'
+          ]}>
+            <span class:list={[
+              'w-1 h-1 rounded-full bg-white transition-all duration-200',
+              isPodcast ? 'opacity-100 scale-100 shadow-[0_0_6px_var(--color-primary)]' : 'opacity-0 scale-50'
+            ]}></span>
             ПОДКАСТЫ
           </a>
         </li>
       </ul>
     </nav>
 
-    <div class="header-actions">
-      <a href="tel:+79923410520" class="phone-link">
-        <span class="phone-label">ТЕЛ //</span> +7 992 341-05-20
+    <div class="flex items-center gap-6 z-110">
+      <a href="tel:+79923410520" class="font-mono text-xs text-text-primary tracking-[0.05em] hover:text-primary-hover transition-colors duration-200">
+        <span class="text-text-muted">ТЕЛ //</span> +7 992 341-05-20
       </a>
-      <a href="#contact" class="btn btn-secondary btn-header-cta">
+      <a href="#contact" class="hidden md:inline-flex items-center justify-center px-4 py-2 font-display text-[0.72rem] font-bold uppercase tracking-[0.1em] rounded-sm border border-border text-text-primary bg-transparent transition-all duration-400 hover:border-white hover:bg-white/[0.03] hover:shadow-[0_0_20px_rgba(255,255,255,0.06)]">
         ОЦЕНИТЬ ПРОЕКТ
       </a>
-      <button class="burger-btn" id="burger-btn" aria-label="Открыть меню" aria-expanded="false">
-        <span class="burger-line"></span>
-        <span class="burger-line"></span>
-        <span class="burger-line"></span>
+      <button class="flex lg:hidden flex-col justify-between w-[22px] h-[14px] bg-transparent border-none cursor-pointer p-0 group" id="burger-btn" aria-label="Открыть меню" aria-expanded="false">
+        <span class="w-full h-px bg-text-primary transition-all duration-200 origin-center group-[.active]:translate-y-[6.5px] group-[.active]:rotate-45"></span>
+        <span class="w-full h-px bg-text-primary transition-all duration-200 group-[.active]:opacity-0"></span>
+        <span class="w-full h-px bg-text-primary transition-all duration-200 origin-center group-[.active]:-translate-y-[6.5px] group-[.active]:-rotate-45"></span>
       </button>
     </div>
   </div>
 
   <!-- Mobile Overlay Menu -->
-  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
-    <div class="mobile-menu-content">
-      <ul class="mobile-nav-links">
+  <div class="fixed inset-0 bg-bg-darkest z-105 opacity-0 invisible transition-all duration-400 flex items-center justify-center aria-hidden:opacity-0 [&.active]:opacity-100 [&.active]:visible" id="mobile-menu" aria-hidden="true">
+    <!-- Glow decorations -->
+    <div class="absolute top-1/4 -left-20 w-64 h-64 bg-glow-amber rounded-full blur-3xl animate-glow-pulse"></div>
+    <div class="absolute bottom-1/4 -right-20 w-48 h-48 bg-glow-violet rounded-full blur-3xl animate-float"></div>
+
+    <div class="flex flex-col items-center justify-between h-[55vh] p-8">
+      <ul class="list-none text-center flex flex-col gap-8">
         <li>
-          <a href="/" class:list={['mobile-nav-link', { active: isHome }]}>
-            <span class="dot-indicator"></span>
+          <a href="/" class:list={[
+            'mobile-nav-link font-display text-4xl font-bold inline-flex items-center gap-3 transition-colors duration-200',
+            isHome ? 'text-text-primary' : 'text-text-secondary hover:text-text-primary'
+          ]}>
+            <span class:list={[
+              'w-2 h-2 rounded-full bg-white transition-all duration-200',
+              isHome ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
+            ]}></span>
             ВИДЕО
           </a>
         </li>
         <li>
-          <a href="/podcast" class:list={['mobile-nav-link', { active: isPodcast }]}>
-            <span class="dot-indicator"></span>
+          <a href="/podcast" class:list={[
+            'mobile-nav-link font-display text-4xl font-bold inline-flex items-center gap-3 transition-colors duration-200',
+            isPodcast ? 'text-text-primary' : 'text-text-secondary hover:text-text-primary'
+          ]}>
+            <span class:list={[
+              'w-2 h-2 rounded-full bg-white transition-all duration-200',
+              isPodcast ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
+            ]}></span>
             ПОДКАСТЫ
           </a>
         </li>
       </ul>
-      <div class="mobile-menu-footer">
-        <a href="tel:+79923410520" class="mobile-phone">+7 992 341-05-20</a>
-        <a href="#contact" class="btn btn-primary mobile-cta">ОЦЕНИТЬ ПРОЕКТ</a>
+      <div class="flex flex-col items-center gap-4 w-full">
+        <a href="tel:+79923410520" class="font-mono text-base tracking-[0.05em] text-text-primary">+7 992 341-05-20</a>
+        <a href="#contact" class="mobile-cta w-full max-w-[280px] inline-flex items-center justify-center px-8 py-3.5 font-display text-sm font-bold uppercase tracking-[0.1em] rounded-sm bg-white text-bg-darkest transition-all duration-400 hover:bg-primary-hover hover:-translate-y-0.5">ОЦЕНИТЬ ПРОЕКТ</a>
       </div>
     </div>
   </div>
@@ -73,7 +101,7 @@ const isPodcast = pathname.startsWith('/podcast');
   const mobileMenu = document.getElementById('mobile-menu');
   const mobileLinks = document.querySelectorAll('.mobile-nav-link, .mobile-cta');
 
-  // Handle scroll class
+  // Handle scroll class — add glassmorphism
   window.addEventListener('scroll', () => {
     if (window.scrollY > 20) {
       header?.classList.add('scrolled');
@@ -111,250 +139,22 @@ const isPodcast = pathname.startsWith('/podcast');
 </script>
 
 <style>
-  .main-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 100;
-    padding: var(--space-lg) 0;
-    border-bottom: 1px solid transparent;
-    transition: all var(--transition-normal);
-  }
-
-  .main-header.scrolled {
+  /* Scrolled glassmorphism state — needs CSS for dynamic class */
+  .main-header:global(.scrolled) {
     background: var(--color-glass);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--color-border);
-    padding: var(--space-md) 0;
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-bottom-color: var(--color-border);
+    padding-top: 1rem;
+    padding-bottom: 1rem;
   }
 
-  .header-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .logo {
-    display: flex;
-    align-items: center;
-    z-index: 110;
-  }
-
-  .logo img {
-    filter: brightness(0.98);
-  }
-
-  .desktop-nav {
-    display: none;
-  }
-
-  .nav-links {
-    display: flex;
-    list-style: none;
-    gap: var(--space-xl);
-  }
-
-  .nav-link {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    font-weight: 400;
-    color: var(--color-text-secondary);
-    letter-spacing: 0.15em;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: var(--space-xs) 0;
-  }
-
-  .nav-link:hover {
-    color: var(--color-primary);
-  }
-
-  .dot-indicator {
-    width: 4px;
-    height: 4px;
-    background-color: var(--color-primary);
-    border-radius: 50%;
-    opacity: 0;
-    transform: scale(0.5);
-    transition: all var(--transition-fast);
-  }
-
-  .nav-link.active {
-    color: var(--color-primary);
-  }
-
-  .nav-link.active .dot-indicator, .nav-link:hover .dot-indicator {
-    opacity: 1;
-    transform: scale(1);
-    box-shadow: 0 0 6px var(--color-primary);
-  }
-
-  .header-actions {
-    display: flex;
-    align-items: center;
-    gap: var(--space-lg);
-    z-index: 110;
-  }
-
-  .phone-link {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--color-text-primary);
-    letter-spacing: 0.05em;
-  }
-
-  .phone-label {
-    color: var(--color-text-muted);
-  }
-
-  .phone-link:hover {
-    color: var(--color-primary);
-  }
-
-  .btn-header-cta {
-    display: none;
-    padding: 0.5rem 1.0rem;
-    font-size: 0.72rem;
-  }
-
-  .burger-btn {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 22px;
-    height: 14px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-  }
-
-  .burger-line {
-    width: 100%;
-    height: 1px;
-    background-color: var(--color-text-primary);
-    transition: all var(--transition-fast);
-  }
-
-  .burger-btn.active .burger-line:nth-child(1) {
-    transform: translateY(6.5px) rotate(45deg);
-  }
-
-  .burger-btn.active .burger-line:nth-child(2) {
-    opacity: 0;
-  }
-
-  .burger-btn.active .burger-line:nth-child(3) {
-    transform: translateY(-6.5px) rotate(-45deg);
-  }
-
-  /* Mobile menu */
-  .mobile-menu {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background-color: var(--color-bg-darkest);
-    z-index: 105;
-    opacity: 0;
-    visibility: hidden;
-    transition: all var(--transition-normal);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .mobile-menu.active {
-    opacity: 1;
-    visibility: visible;
-  }
-
-  .mobile-menu-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    height: 55vh;
-    padding: var(--space-xl);
-  }
-
-  .mobile-nav-links {
-    list-style: none;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-xl);
-  }
-
-  .mobile-nav-link {
-    font-family: var(--font-display);
-    font-size: 2.2rem;
-    font-weight: 700;
-    color: var(--color-text-primary);
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-sm);
-  }
-
-  .mobile-nav-link .dot-indicator {
-    width: 8px;
-    height: 8px;
-  }
-
-  .mobile-nav-link.active {
-    color: var(--color-primary);
-  }
-
-  .mobile-nav-link.active .dot-indicator {
-    opacity: 1;
-    transform: scale(1);
-  }
-
-  .mobile-menu-footer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--space-md);
-    width: 100%;
-  }
-
-  .mobile-phone {
-    font-family: var(--font-mono);
-    font-size: 1rem;
-    letter-spacing: 0.05em;
-  }
-
-  .mobile-cta {
-    width: 100%;
-    max-width: 280px;
-  }
-
-  /* Media Queries */
-  @media (min-width: 768px) {
-    .btn-header-cta {
-      display: inline-flex;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .desktop-nav {
-      display: block;
-    }
-    
-    .burger-btn {
-      display: none;
-    }
-
-    .mobile-menu {
-      display: none;
-    }
-  }
-
-  :global(body.no-scroll) {
-    overflow: hidden;
+  #main-header.scrolled {
+    background: var(--color-glass);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-bottom-color: var(--color-border);
+    padding-top: 1rem;
+    padding-bottom: 1rem;
   }
 </style>

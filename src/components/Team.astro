@@ -51,150 +51,36 @@ const team = [
 ];
 ---
 
-<section class="section team-section" id="team">
-  <div class="container">
-    <div class="team-header">
-      <span class="eyebrow">Команда //</span>
+<section class="relative py-[clamp(5rem,9vw,9rem)] bg-bg-darkest border-t border-border overflow-hidden z-10" id="team">
+  <!-- Glow decoration -->
+  <div class="absolute -bottom-32 left-1/4 w-80 h-80 bg-glow-violet rounded-full blur-3xl animate-float-slow pointer-events-none"></div>
+
+  <div class="w-full max-w-[1200px] mx-auto px-8">
+    <div class="mb-12 max-w-[600px]" data-reveal>
+      <span class="font-mono text-[0.7rem] font-normal tracking-[0.15em] text-accent inline-flex items-center gap-2 mb-4 uppercase before:content-['//'] before:text-text-muted">Команда //</span>
       <h2>Наша команда</h2>
-      <p class="team-subtitle">
+      <p class="text-[1.05rem] leading-relaxed text-text-secondary">
         Сплоченный коллектив профессионалов с опытом работы в кино, ТВ и интернет-медиа от 5 до 20 лет.
       </p>
     </div>
 
-    <div class="team-grid">
-      {team.map(member => (
-        <div class="team-card glass">
-          <div class="member-avatar">
-            <span class="avatar-initials">{member.initials}</span>
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 xl:gap-6">
+      {team.map((member, idx) => (
+        <div 
+          class="rounded bg-glass border border-border backdrop-blur-[20px] p-8 flex flex-row xl:flex-col items-center xl:items-start gap-6 transition-all duration-400 hover:-translate-y-1 hover:border-white/15 hover:shadow-[0_8px_32px_rgba(0,0,0,0.6),0_0_16px_rgba(200,162,123,0.06)] group"
+          data-reveal
+          data-reveal-delay={String(Math.min(idx + 1, 8))}
+        >
+          <div class="w-[60px] h-[60px] xl:w-16 xl:h-16 rounded-full bg-[rgba(224,150,92,0.03)] border border-border flex items-center justify-center shrink-0 font-display text-xl xl:text-2xl font-bold text-white transition-all duration-400 group-hover:border-accent group-hover:bg-[rgba(224,150,92,0.08)] group-hover:shadow-[0_0_20px_rgba(200,162,123,0.15)]">
+            {member.initials}
           </div>
-          <div class="member-info">
-            <span class="member-role">{member.role}</span>
-            <h3 class="member-name">{member.name}</h3>
-            <p class="member-desc">{member.desc}</p>
+          <div class="flex flex-col">
+            <span class="font-mono text-[0.65rem] uppercase text-accent font-medium tracking-[0.1em] mb-0.5">{member.role}</span>
+            <h3 class="font-display text-[1.15rem] font-bold mb-2 leading-tight uppercase tracking-[-0.01em]">{member.name}</h3>
+            <p class="text-sm text-text-secondary leading-relaxed">{member.desc}</p>
           </div>
         </div>
       ))}
     </div>
   </div>
 </section>
-
-<style>
-  .team-section {
-    background-color: var(--color-bg-darkest);
-    border-top: 1px solid var(--color-border);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .team-header {
-    margin-bottom: var(--space-xxl);
-    max-width: 600px;
-  }
-
-  .team-subtitle {
-    font-size: 1.05rem;
-    line-height: 1.6;
-    color: var(--color-text-secondary);
-  }
-
-  .team-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-xl);
-  }
-
-  .team-card {
-    border-radius: var(--border-radius-md);
-    padding: var(--space-xl);
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: var(--space-lg);
-    transition: all var(--transition-normal);
-  }
-
-  .team-card:hover {
-    border-color: var(--color-primary);
-    transform: translateY(-2px);
-  }
-
-  .member-avatar {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background-color: rgba(224, 150, 92, 0.03);
-    border: 1px solid var(--color-border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    font-family: var(--font-display);
-    font-size: 1.35rem;
-    font-weight: 700;
-    color: var(--color-primary);
-    transition: all var(--transition-normal);
-  }
-
-  .team-card:hover .member-avatar {
-    border-color: var(--color-primary);
-    background-color: rgba(224, 150, 92, 0.08);
-    box-shadow: 0 0 15px rgba(224, 150, 92, 0.1);
-  }
-
-  .member-info {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .member-role {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    text-transform: uppercase;
-    color: var(--color-accent);
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    margin-bottom: 2px;
-  }
-
-  .member-name {
-    font-family: var(--font-display);
-    font-size: 1.15rem;
-    font-weight: 700;
-    margin-bottom: var(--space-xs);
-    line-height: 1.2;
-    text-transform: uppercase;
-    letter-spacing: -0.01em;
-  }
-
-  .member-desc {
-    font-size: 0.85rem;
-    color: var(--color-text-secondary);
-    line-height: 1.5;
-  }
-
-  /* Media Queries */
-  @media (min-width: 768px) {
-    .team-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  @media (min-width: 1200px) {
-    .team-grid {
-      grid-template-columns: repeat(4, 1fr);
-      gap: var(--space-lg);
-    }
-    
-    .team-card {
-      flex-direction: column;
-      align-items: flex-start;
-      text-align: left;
-    }
-
-    .member-avatar {
-      width: 64px;
-      height: 64px;
-      margin-bottom: var(--space-xs);
-    }
-  }
-</style>

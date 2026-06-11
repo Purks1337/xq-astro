@@ -1,0 +1,334 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PricingPackages from '../components/PricingPackages.astro';
+import Equipment from '../components/Equipment.astro';
+import FAQ from '../components/FAQ.astro';
+import ContactForm from '../components/ContactForm.astro';
+import VideoModal from '../components/VideoModal.astro';
+---
+
+<BaseLayout 
+  title="Аренда студии подкастов в Екатеринбурге (ЕКБ): Запись видеоподкастов | Хвалите Quality"
+  description="Снимайте подкасты в лучшем качестве и уютной атмосфере. Аренда видеостудии в ЕКБ. Современное аудио и видео оборудование, локация-трансформер, хромакей."
+>
+  <!-- Podcast Hero -->
+  <section class="podcast-hero">
+    <div class="container hero-container">
+      <div class="hero-text">
+        <span class="eyebrow">Студия подкастов</span>
+        <h1>Снимайте подкасты в лучшем качестве</h1>
+        <p class="hero-sub">
+          Уютное пространство-трансформер в Екатеринбурге. Световые сетапы под любой стиль, ретро-телевизоры, гринскрин и премиальный звук Shure SM7B. Запись аудио и видео «под ключ».
+        </p>
+        <div class="hero-ctas">
+          <a href="#contact" class="btn btn-primary">Забронировать дату</a>
+          <a href="tel:+79923410520" class="btn btn-secondary">Позвонить</a>
+        </div>
+      </div>
+
+      <div class="hero-media-wrapper">
+        <div class="viewfinder-frame">
+          <span class="vf-corner top-left"></span>
+          <span class="vf-corner top-right"></span>
+          <span class="vf-corner bottom-left"></span>
+          <span class="vf-corner bottom-right"></span>
+          <span class="vf-rec-dot"></span>
+          <span class="vf-rec-text">LIVE</span>
+          
+          <div class="studio-card">
+            <div class="studio-poster-bg"></div>
+            <div class="studio-overlay">
+              <span class="studio-badge">Екатеринбург, Ботаническая 19</span>
+              <h3>Ламповая атмосфера 24/7</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Space Locations / Features -->
+  <section class="section space-section" id="space">
+    <div class="container">
+      <div class="section-heading">
+        <span class="eyebrow">Локации</span>
+        <h2>Уютные интерьеры для ваших съемок</h2>
+      </div>
+
+      <div class="locations-grid">
+        <div class="loc-card glass">
+          <div class="loc-visual location-transformer"></div>
+          <div class="loc-info">
+            <h3>Локация Трансформер</h3>
+            <p>
+              Более 20 вариантов фоновых решений. Мы быстро соберем сцену под ваш формат: от классических текстурных фонов и кирпичной кладки до цифровых миров через встроенный хромакей (гринскрин).
+            </p>
+          </div>
+        </div>
+
+        <div class="loc-card glass">
+          <div class="loc-visual location-lounge"></div>
+          <div class="loc-info">
+            <h3>Лаундж Локация</h3>
+            <p>
+              Антуражная сцена, окруженная зелеными растениями. Главная фишка — инсталляция из 5 ретро-телевизоров, на экраны которых можно вывести любой ваш логотип, статичное изображение или видеоряд.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Podcast Packages -->
+  <PricingPackages />
+
+  <!-- Equipment Specification Tabs -->
+  <Equipment />
+
+  <!-- FAQ Accordion -->
+  <FAQ />
+
+  <!-- Contact Form Section -->
+  <ContactForm 
+    title="Забронировать студию" 
+    subtitle="Оставьте ваши контакты. Мы перезвоним вам в течение часа, чтобы подтвердить свободное время и согласовать аренду."
+  />
+
+  <!-- Video Lightbox Player Modal -->
+  <VideoModal />
+</BaseLayout>
+
+<style>
+  .podcast-hero {
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 120px;
+    padding-bottom: var(--space-xxl);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xxl);
+    align-items: center;
+  }
+
+  .hero-text {
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+  }
+
+  .hero-sub {
+    font-size: clamp(1.1rem, 2vw, 1.3rem);
+    line-height: 1.6;
+    margin-top: var(--space-lg);
+    margin-bottom: var(--space-xxl);
+    max-width: 550px;
+  }
+
+  .hero-ctas {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  /* Media Visual container */
+  .hero-media-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    z-index: 10;
+  }
+
+  .viewfinder-frame {
+    width: 100%;
+    max-width: 600px;
+    aspect-ratio: 16 / 9;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    position: relative;
+    padding: var(--space-md);
+    background-color: rgba(255, 255, 255, 0.01);
+  }
+
+  .vf-corner {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border-color: rgba(255, 255, 255, 0.3);
+    border-style: solid;
+  }
+
+  .top-left { top: 4px; left: 4px; border-width: 1.5px 0 0 1.5px; }
+  .top-right { top: 4px; right: 4px; border-width: 1.5px 1.5px 0 0; }
+  .bottom-left { bottom: 4px; left: 4px; border-width: 0 0 1.5px 1.5px; }
+  .bottom-right { bottom: 4px; right: 4px; border-width: 0 1.5px 1.5px 0; }
+
+  .vf-rec-dot {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    width: 8px;
+    height: 8px;
+    background-color: var(--color-primary);
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+  }
+
+  .vf-rec-text {
+    position: absolute;
+    top: 10px;
+    left: 28px;
+    font-family: var(--font-display);
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    letter-spacing: 0.1em;
+  }
+
+  .studio-card {
+    width: 100%;
+    height: 100%;
+    border-radius: var(--border-radius-sm);
+    overflow: hidden;
+    position: relative;
+    background: #101012;
+  }
+
+  .studio-poster-bg {
+    width: 100%;
+    height: 100%;
+    background-image: 
+      linear-gradient(rgba(255, 107, 0, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 107, 0, 0.04) 1px, transparent 1px);
+    background-size: 20px 20px;
+    opacity: 0.6;
+  }
+
+  .studio-overlay {
+    position: absolute;
+    bottom: var(--space-lg);
+    left: var(--space-lg);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .studio-badge {
+    align-self: flex-start;
+    background-color: rgba(255, 107, 0, 0.1);
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+    font-size: 0.75rem;
+    font-family: var(--font-display);
+    padding: 2px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+
+  .studio-overlay h3 {
+    font-size: 1.3rem;
+    margin: 0;
+  }
+
+  /* Locations Styles */
+  .space-section {
+    background-color: var(--color-bg-darkest);
+    border-top: 1px solid var(--color-border);
+    position: relative;
+  }
+
+  .section-heading {
+    margin-bottom: var(--space-xxl);
+    max-width: 600px;
+  }
+
+  .locations-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  .loc-card {
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: all var(--transition-normal);
+  }
+
+  .loc-card:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+  }
+
+  .loc-visual {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    background-color: #101012;
+    position: relative;
+  }
+
+  .location-transformer {
+    background-image: 
+      linear-gradient(135deg, rgba(255, 107, 0, 0.03) 25%, transparent 25%), 
+      linear-gradient(225deg, rgba(255, 107, 0, 0.03) 25%, transparent 25%);
+    background-size: 30px 30px;
+  }
+
+  .location-lounge {
+    background-image: 
+      radial-gradient(rgba(255, 107, 0, 0.02) 20%, transparent 20%),
+      radial-gradient(rgba(255, 107, 0, 0.02) 20%, transparent 20%);
+    background-size: 20px 20px;
+    background-position: 0 0, 10px 10px;
+  }
+
+  .loc-info {
+    padding: var(--space-lg);
+  }
+
+  .loc-info h3 {
+    font-size: 1.3rem;
+    margin-bottom: var(--space-xs);
+  }
+
+  .loc-info p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+  }
+
+  @keyframes pulse {
+    0% { opacity: 0.3; }
+    50% { opacity: 1; }
+    100% { opacity: 0.3; }
+  }
+
+  /* Media Queries */
+  @media (min-width: 480px) {
+    .hero-ctas {
+      flex-direction: row;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .locations-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero-container {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-xxl);
+    }
+  }
+</style>

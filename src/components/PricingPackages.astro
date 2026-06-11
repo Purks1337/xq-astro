@@ -1,0 +1,228 @@
+---
+const packages = [
+  {
+    title: "Аудио Запись",
+    price: "от 3 000 ₽",
+    period: "в час",
+    desc: "Идеально для классических разговорных подкастов, озвучки или голосовых заметок.",
+    features: [
+      "Аренда студии с шумоизоляцией",
+      "Профессиональные микрофоны (Shure/AKG)",
+      "Звукорежиссер во время сессии",
+      "Запись многодорожечного аудио",
+      "Выдача исходных файлов в день записи"
+    ],
+    popular: false
+  },
+  {
+    title: "Видео Запись",
+    price: "от 5 000 ₽",
+    period: "в час",
+    desc: "Съемка полноценного видеоподкаста, интервью или Reels для соцсетей.",
+    features: [
+      "Запись видео на 2-3 камеры Sony",
+      "Аудиооборудование и микрофоны гостям",
+      "Профессиональный световой сетап",
+      "Оператор-инженер на площадке",
+      "Предварительная настройка сцены"
+    ],
+    popular: true
+  },
+  {
+    title: "Пакет «Под Ключ»",
+    price: "от 15 000 ₽",
+    period: "за проект",
+    desc: "Полный цикл от записи до публикации готового выпуска на всех площадках.",
+    features: [
+      "Запись аудио и видео (до 2 часов)",
+      "Монтаж выпуска (вырезка пауз, дублей)",
+      "Цветокоррекция и сведение звука",
+      "Создание заставок / саунд-дизайн",
+      "Дистрибуция на Apple, Яндекс и YouTube"
+    ],
+    popular: false
+  }
+];
+---
+
+<section class="section pricing-section" id="packages">
+  <div class="container">
+    <div class="pricing-header">
+      <span class="eyebrow">Тарифы</span>
+      <h2>Стоимость услуг</h2>
+      <p class="pricing-sub">
+        Прозрачные цены без скрытых платежей. Выберите оптимальный пакет под ваши задачи.
+      </p>
+    </div>
+
+    <div class="pricing-grid">
+      {packages.map(pkg => (
+        <div class:list={['pricing-card', 'glass', { popular: pkg.popular }]}>
+          {pkg.popular && <span class="popular-badge">Популярно</span>}
+          <div class="card-header">
+            <h3>{pkg.title}</h3>
+            <div class="price-block">
+              <span class="price-val">{pkg.price}</span>
+              <span class="price-period">/{pkg.period}</span>
+            </div>
+            <p class="pkg-desc">{pkg.desc}</p>
+          </div>
+          
+          <ul class="pkg-features">
+            {pkg.features.map(feat => (
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="check-icon"><polyline points="20 6 9 17 4 12" /></svg>
+                <span>{feat}</span>
+              </li>
+            ))}
+          </ul>
+
+          <a href="#contact" class:list={['btn', pkg.popular ? 'btn-primary' : 'btn-secondary', 'pkg-btn']}>
+            Заказать расчет
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .pricing-section {
+    background-color: var(--color-bg-darkest);
+    border-top: 1px solid var(--color-border);
+    position: relative;
+  }
+
+  .pricing-header {
+    margin-bottom: var(--space-xxl);
+    max-width: 600px;
+  }
+
+  .pricing-sub {
+    font-size: 1.05rem;
+    color: var(--color-text-secondary);
+  }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+    align-items: stretch;
+  }
+
+  .pricing-card {
+    border-radius: var(--border-radius-lg);
+    padding: var(--space-xl);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: all var(--transition-normal);
+  }
+
+  .pricing-card:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-4px);
+  }
+
+  .pricing-card.popular {
+    border-color: var(--color-primary);
+    background: radial-gradient(circle at top right, rgba(255, 107, 0, 0.05) 0%, rgba(22, 22, 25, 0.7) 100%);
+    box-shadow: 0 10px 40px rgba(255, 107, 0, 0.05);
+  }
+
+  .popular-badge {
+    position: absolute;
+    top: var(--space-md);
+    right: var(--space-md);
+    background-color: var(--color-primary);
+    color: #000;
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+  }
+
+  .card-header {
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: var(--space-lg);
+    margin-bottom: var(--space-lg);
+  }
+
+  .card-header h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: var(--space-sm);
+  }
+
+  .price-block {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: var(--space-sm);
+  }
+
+  .price-val {
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--color-text-primary);
+  }
+
+  .price-period {
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+  }
+
+  .pkg-desc {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+  }
+
+  .pkg-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-xxl);
+    flex-grow: 1;
+  }
+
+  .pkg-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+  }
+
+  .check-icon {
+    color: var(--color-primary);
+    flex-shrink: 0;
+    margin-top: 0.2rem;
+  }
+
+  .pkg-btn {
+    width: 100%;
+  }
+
+  /* Media Queries */
+  @media (min-width: 768px) {
+    .pricing-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .pricing-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-lg);
+    }
+    
+    .pricing-card {
+      padding: var(--space-xxl) var(--space-xl);
+    }
+  }
+</style>

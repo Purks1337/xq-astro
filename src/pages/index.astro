@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import ShowcaseGrid from '../components/ShowcaseGrid.astro';
+import Team from '../components/Team.astro';
+import ContactForm from '../components/ContactForm.astro';
+import VideoModal from '../components/VideoModal.astro';
+---
+
+<BaseLayout 
+  title="Хвалите Quality Production: Студия видеопродакшна — съемка видео, клипов, рекламы, трансляции в ЕКБ"
+  description="Профессиональная студия видеопродакшна «Хвалите Quality» в Екатеринбурге. Создаем рекламные ролики, клипы, интервью и прямые трансляции. Полный цикл производства."
+>
+  <!-- Hero Section -->
+  <Hero />
+
+  <!-- Showcase Section -->
+  <ShowcaseGrid />
+
+  <!-- Team Section -->
+  <Team />
+
+  <!-- Contact Form Section -->
+  <ContactForm 
+    title="Рассчитать видеопроект" 
+    subtitle="Оставьте заявку на расчет стоимости видеосъемки. Мы подготовим смету с учетом вашего сценария и пожеланий."
+  />
+
+  <!-- Lightbox Video Player Modal -->
+  <VideoModal />
+</BaseLayout>

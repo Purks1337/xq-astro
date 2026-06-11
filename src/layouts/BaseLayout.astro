@@ -1,0 +1,72 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import AudiowaveCanvas from '../components/AudiowaveCanvas.astro';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const {
+  title = "Хвалите Quality Production: Студия видеопродакшна",
+  description = "Профессиональная студия видеопродакшна «Хвалите Quality». Создаем музыкальные клипы, рекламные ролики, интервью, подкасты и проводим прямые трансляции. Полный цикл от идеи до монтажа!",
+  ogImage = "/images/badge.png"
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- SEO Meta Tags -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content="видеопродакшн, съемка видео, видеосъемка, студия видеопродакшна, хвалите quality, съемка музыкальных клипов, съемка интервью, прямые трансляции, видеомонтаж, создание видеороликов, видео для бизнеса, рекламный ролик, снять рекламу, снять рекламный ролик, подкасты Екатеринбург, аренда студии подкастов" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={ogImage} />
+  </head>
+  <body>
+    <!-- Interactive Signature Backdrop -->
+    <AudiowaveCanvas />
+
+    <!-- Layout Wrapper -->
+    <div class="app-layout">
+      <Header />
+      <main id="main-content">
+        <slot />
+      </main>
+      <Footer />
+    </div>
+
+    <style>
+      .app-layout {
+        position: relative;
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+      
+      #main-content {
+        flex-grow: 1;
+      }
+    </style>
+  </body>
+</html>

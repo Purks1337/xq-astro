@@ -1,0 +1,367 @@
+---
+interface Props {
+  title?: string;
+  subtitle?: string;
+}
+
+const { 
+  title = "Рассчитайте ваш проект", 
+  subtitle = "Заполните форму ниже, и мы свяжемся с вами в течение часа для детального обсуждения." 
+} = Astro.props;
+---
+
+<section class="section contact-section" id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info-block">
+        <span class="eyebrow">Контакты</span>
+        <h2>Давайте создавать вместе</h2>
+        <p class="contact-lead-text">
+          У вас есть идея для проекта, клипа, рекламы или подкаста? Мы поможем реализовать её на высшем уровне. Наша команда сопровождает проект от написания сценария до финального монтажа.
+        </p>
+
+        <div class="quick-stats">
+          <div class="stat-card">
+            <span class="stat-num">10+</span>
+            <span class="stat-label">Лет опыта в индустрии</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-num">100%</span>
+            <span class="stat-label">Качество без компромиссов</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form-block glass" id="form-container">
+        <h3>{title}</h3>
+        <p class="form-sub">{subtitle}</p>
+
+        <form id="project-form" class="project-form" novalidate>
+          <div class="form-group">
+            <label for="name-input" class="form-label">Как к вам обращаться?</label>
+            <input 
+              type="text" 
+              id="name-input" 
+              name="name" 
+              class="form-input" 
+              placeholder="Ваше имя" 
+              required
+            />
+            <span class="error-msg" id="name-error">Пожалуйста, введите ваше имя</span>
+          </div>
+
+          <div class="form-group">
+            <label for="phone-input" class="form-label">Номер телефона</label>
+            <input 
+              type="tel" 
+              id="phone-input" 
+              name="phone" 
+              class="form-input" 
+              placeholder="+7 (999) 000-00-00" 
+              required
+            />
+            <span class="error-msg" id="phone-error">Пожалуйста, введите корректный номер телефона</span>
+          </div>
+
+          <div class="form-group">
+            <label for="email-input" class="form-label">Email</label>
+            <input 
+              type="email" 
+              id="email-input" 
+              name="email" 
+              class="form-input" 
+              placeholder="example@mail.ru" 
+              required
+            />
+            <span class="error-msg" id="email-error">Пожалуйста, введите корректный Email адрес</span>
+          </div>
+
+          <div class="form-group">
+            <label for="message-textarea" class="form-label">Опишите вашу идею</label>
+            <textarea 
+              id="message-textarea" 
+              name="message" 
+              class="form-textarea" 
+              rows="4" 
+              placeholder="Расскажите о вашем проекте (тип видео, хронометраж, цели)..."
+            ></textarea>
+          </div>
+
+          <div class="form-group agreement-group">
+            <label class="form-checkbox-label">
+              <input type="checkbox" id="agreement-checkbox" name="agreement" required />
+              <span>Я согласен с <a href="/privacy" target="_blank" class="accent-link">политикой конфиденциальности</a></span>
+            </label>
+            <span class="error-msg" id="agreement-error">Необходимо согласиться с политикой конфиденциальности</span>
+          </div>
+
+          <button type="submit" class="btn btn-primary submit-btn">
+            Отправить заявку
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
+          </button>
+        </form>
+
+        <!-- Success Message (hidden by default) -->
+        <div class="success-overlay" id="success-overlay">
+          <div class="success-content">
+            <div class="success-icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+            </div>
+            <h4>Спасибо за заявку!</h4>
+            <p>Мы получили ваши данные и свяжемся с вами в течение часа для обсуждения деталей вашего проекта.</p>
+            <button id="reset-form-btn" class="btn btn-secondary btn-sm">Отправить еще раз</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById('project-form') as HTMLFormElement;
+  const nameInput = document.getElementById('name-input') as HTMLInputElement;
+  const phoneInput = document.getElementById('phone-input') as HTMLInputElement;
+  const emailInput = document.getElementById('email-input') as HTMLInputElement;
+  const agreement = document.getElementById('agreement-checkbox') as HTMLInputElement;
+  const successOverlay = document.getElementById('success-overlay');
+  const resetBtn = document.getElementById('reset-form-btn');
+
+  // Input elements validation
+  function validateInput(input: HTMLInputElement, errorElId: string, customCheck?: () => boolean): boolean {
+    const errorEl = document.getElementById(errorElId);
+    let isValid = input.checkValidity();
+    
+    if (customCheck) {
+      isValid = isValid && customCheck();
+    }
+
+    if (!isValid) {
+      input.classList.add('invalid');
+      if (errorEl) errorEl.classList.add('show');
+    } else {
+      input.classList.remove('invalid');
+      if (errorEl) errorEl.classList.remove('show');
+    }
+
+    return isValid;
+  }
+
+  // Simple validations on blur
+  nameInput?.addEventListener('blur', () => validateInput(nameInput, 'name-error'));
+  phoneInput?.addEventListener('blur', () => validateInput(phoneInput, 'phone-error'));
+  emailInput?.addEventListener('blur', () => validateInput(emailInput, 'email-error'));
+  agreement?.addEventListener('change', () => validateInput(agreement, 'agreement-error'));
+
+  // Form submit handler
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const isNameValid = validateInput(nameInput, 'name-error');
+    const isPhoneValid = validateInput(phoneInput, 'phone-error');
+    const isEmailValid = validateInput(emailInput, 'email-error');
+    const isAgreementValid = validateInput(agreement, 'agreement-error');
+
+    if (isNameValid && isPhoneValid && isEmailValid && isAgreementValid) {
+      // Collect form data
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData);
+      
+      console.log('Form submitted successfully:', data);
+
+      // Show success screen with transition
+      if (successOverlay) {
+        successOverlay.classList.add('active');
+      }
+    }
+  });
+
+  resetBtn?.addEventListener('click', () => {
+    form?.reset();
+    successOverlay?.classList.remove('active');
+    // Remove invalid classes
+    nameInput.classList.remove('invalid');
+    phoneInput.classList.remove('invalid');
+    emailInput.classList.remove('invalid');
+  });
+</script>
+
+<style>
+  .contact-section {
+    background-color: var(--color-bg-darkest);
+    border-top: 1px solid var(--color-border);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xxl);
+    align-items: center;
+  }
+
+  .contact-info-block {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .contact-lead-text {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: var(--space-xl);
+  }
+
+  .quick-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+  }
+
+  .stat-card {
+    background-color: var(--color-bg-dark);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-md);
+    padding: var(--space-lg);
+  }
+
+  .stat-num {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--color-primary);
+    line-height: 1;
+    margin-bottom: var(--space-xs);
+  }
+
+  .stat-label {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .contact-form-block {
+    position: relative;
+    border-radius: var(--border-radius-lg);
+    padding: var(--space-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+  }
+
+  .contact-form-block h3 {
+    margin-bottom: var(--space-xxs);
+  }
+
+  .form-sub {
+    font-size: 0.9rem;
+    margin-bottom: var(--space-xl);
+  }
+
+  .project-form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .error-msg {
+    display: none;
+    font-size: 0.75rem;
+    color: #ef4444;
+    margin-top: var(--space-xs);
+  }
+
+  .error-msg.show {
+    display: block;
+  }
+
+  .form-input.invalid, .form-textarea.invalid {
+    border-color: #ef4444;
+    background: rgba(239, 68, 68, 0.02);
+  }
+
+  .agreement-group {
+    margin-top: var(--space-sm);
+    margin-bottom: var(--space-xl);
+  }
+
+  .accent-link {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
+
+  .accent-link:hover {
+    color: var(--color-primary-hover);
+  }
+
+  .submit-btn {
+    width: 100%;
+  }
+
+  /* Success screen style */
+  .success-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-bg-card);
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-xl);
+    text-align: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-normal);
+  }
+
+  .success-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .success-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+    max-width: 350px;
+  }
+
+  .success-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: rgba(255, 107, 0, 0.1);
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--space-xs);
+    border: 2px solid var(--color-primary);
+    box-shadow: 0 0 15px rgba(255, 107, 0, 0.2);
+  }
+
+  .success-content h4 {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  .success-content p {
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+  }
+
+  /* Media Queries */
+  @media (min-width: 1024px) {
+    .contact-grid {
+      grid-template-columns: 1fr 1.1fr;
+      gap: var(--space-xxl);
+    }
+    
+    .contact-form-block {
+      padding: var(--space-xxl);
+    }
+  }
+</style>

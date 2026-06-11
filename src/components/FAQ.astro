@@ -1,0 +1,142 @@
+---
+const faqs = [
+  {
+    q: "Кому подойдет наша студия?",
+    a: "В нашей студии комфортно каждому! Мы рады как начинающим блогерам и авторам YouTube-каналов, так и профессиональным продакшн-командам. Если вам нужно уютное и тихое место для съемки интервью, записи аудиоподкаста или видеороликов в формате «говорящей головы» — вы наш клиент."
+  },
+  {
+    q: "Как быстро вы получите готовый подкаст?",
+    a: "Обычно базовая обработка и сведение аудио/видео материала (1-2 часа записи) занимают до 24 часов. Вы сможете получить готовый смонтированный выпуск уже на следующий день после записи."
+  },
+  {
+    q: "Сколько времени хранятся наши записи?",
+    a: "Ваши исходные дорожки и готовые файлы надежно хранятся на наших серверах в течение 7 дней после записи. Пожалуйста, скачайте их в этот период. Если вам требуется продлить хранение — просто предупредите нас заранее."
+  },
+  {
+    q: "Какая стоимость услуг студии?",
+    a: "Аренда студии для записи аудио начинается от 3000 рублей в час. Видеосъемка подкаста с оператором — от 5000 рублей в час. В стоимость входит базовое оборудование. Чтобы получить расчет индивидуального пакета под ключ (с монтажом, интро, дистрибуцией), оставьте заявку."
+  },
+  {
+    q: "Как легко добраться до студии и что с парковкой?",
+    a: "Мы находимся по адресу ул. Ботаническая 19 (вход с улицы, во дворе). Доступ в студию круглосуточный 24/7 по предварительной брони, без пропусков. На территории перед студией есть парковочная зона для клиентов."
+  }
+];
+---
+
+<section class="section faq-section" id="faq">
+  <div class="container">
+    <div class="faq-header">
+      <span class="eyebrow">FAQ</span>
+      <h2>Вопросы и ответы</h2>
+    </div>
+
+    <div class="faq-accordion-list">
+      {faqs.map(faq => (
+        <details class="faq-item glass">
+          <summary class="faq-summary">
+            <h3>{faq.q}</h3>
+            <span class="faq-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>
+            </span>
+          </summary>
+          <div class="faq-content">
+            <p>{faq.a}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq-section {
+    background-color: var(--color-bg-darkest);
+    border-top: 1px solid var(--color-border);
+    position: relative;
+  }
+
+  .faq-header {
+    margin-bottom: var(--space-xxl);
+    max-width: 600px;
+  }
+
+  .faq-accordion-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .faq-item {
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+    transition: all var(--transition-normal);
+  }
+
+  .faq-item[open] {
+    border-color: var(--color-primary);
+  }
+
+  .faq-summary {
+    padding: var(--space-lg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+  }
+
+  .faq-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-summary h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin: 0;
+    padding-right: var(--space-lg);
+  }
+
+  .faq-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: rgba(255, 107, 0, 0.05);
+    color: var(--color-primary);
+    transition: all var(--transition-normal);
+    flex-shrink: 0;
+  }
+
+  .faq-item[open] .faq-icon {
+    transform: rotate(45deg);
+    background-color: var(--color-primary);
+    color: #000;
+  }
+
+  .faq-content {
+    padding: 0 var(--space-lg) var(--space-lg) var(--space-lg);
+    animation: slideDown 0.3s ease-out;
+  }
+
+  .faq-content p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--color-text-secondary);
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-5px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

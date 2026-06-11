@@ -1,0 +1,328 @@
+---
+const categories = ["Все", "Реклама", "Клипы", "Трансляции", "Кино", "Анимация"];
+
+const projects = [
+  {
+    title: "Фирменная Реклама бренда X",
+    category: "Реклама",
+    desc: "Продвижение технологической платформы. Сочетание реальных съемок и 3D-графики.",
+    videoUrl: "https://kinescope.io/embed/placeholder-ad",
+    thumbnail: "rgba(255,107,0,0.05)"
+  },
+  {
+    title: "Музыкальный клип артиста Y",
+    category: "Клипы",
+    desc: "Атмосферный клип в стиле нео-нуар с акцентом на цветовую палитру.",
+    videoUrl: "https://kinescope.io/embed/placeholder-clip",
+    thumbnail: "rgba(255,107,0,0.05)"
+  },
+  {
+    title: "Онлайн Трансляция Кибер-События",
+    category: "Трансляции",
+    desc: "Многокамерная прямая трансляция финала соревнований с выводом статистики.",
+    videoUrl: "https://kinescope.io/embed/placeholder-stream",
+    thumbnail: "rgba(255,107,0,0.05)"
+  },
+  {
+    title: "Документальный проект «Урал»",
+    category: "Кино",
+    desc: "История людей искусства на Урале. Полный цикл производства.",
+    videoUrl: "https://kinescope.io/embed/placeholder-doc",
+    thumbnail: "rgba(255,107,0,0.05)"
+  },
+  {
+    title: "Промо-ролик для стартапа",
+    category: "Реклама",
+    desc: "Динамичный видеоролик, объясняющий принципы работы приложения за 60 секунд.",
+    videoUrl: "https://kinescope.io/embed/placeholder-promo",
+    thumbnail: "rgba(255,107,0,0.05)"
+  },
+  {
+    title: "3D Презентация Девайса",
+    category: "Анимация",
+    desc: "Реалистичный рендер и симуляция физики для технологического продукта.",
+    videoUrl: "https://kinescope.io/embed/placeholder-animation",
+    thumbnail: "rgba(255,107,0,0.05)"
+  }
+];
+---
+
+<section class="section portfolio-section" id="portfolio">
+  <div class="container">
+    <div class="portfolio-header">
+      <div class="header-left">
+        <span class="eyebrow">Портфолио</span>
+        <h2>Наши работы</h2>
+      </div>
+      
+      <!-- Category Filter Tabs -->
+      <div class="filter-tabs" role="tablist" aria-label="Фильтр проектов">
+        {categories.map((cat, idx) => (
+          <button 
+            class:list={['filter-btn', { active: idx === 0 }]} 
+            role="tab" 
+            aria-selected={idx === 0 ? "true" : "false"}
+            data-filter={cat}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <!-- Portfolio Grid -->
+    <div class="projects-grid" id="projects-grid">
+      {projects.map(project => (
+        <div class="project-card glass" data-category={project.category} data-video-src={project.videoUrl}>
+          <div class="project-poster">
+            <!-- Film reels detail -->
+            <span class="film-border top-border"></span>
+            <span class="film-border bottom-border"></span>
+            <div class="poster-overlay">
+              <div class="play-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3" /></svg>
+              </div>
+            </div>
+            <div class="poster-color-bg" style={`background-color: ${project.thumbnail}`}></div>
+          </div>
+          <div class="project-info">
+            <span class="project-cat">{project.category}</span>
+            <h3 class="project-title">{project.title}</h3>
+            <p class="project-desc">{project.desc}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const projectCards = document.querySelectorAll('.project-card');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Set active button
+      filterBtns.forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+
+      const filterVal = btn.getAttribute('data-filter');
+
+      // Filter cards
+      projectCards.forEach(card => {
+        const cardCat = card.getAttribute('data-category');
+        
+        if (filterVal === 'Все' || cardCat === filterVal) {
+          card.classList.remove('hide');
+        } else {
+          card.classList.add('hide');
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .portfolio-section {
+    background-color: var(--color-bg-darkest);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .portfolio-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-xxl);
+  }
+
+  .filter-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+
+  .filter-btn {
+    background: transparent;
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-sm);
+    color: var(--color-text-secondary);
+    padding: 0.5rem 1.2rem;
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+  }
+
+  .filter-btn:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+
+  .filter-btn.active {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    color: #000;
+  }
+
+  /* Projects Grid */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+
+  .project-card {
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .project-card.hide {
+    display: none;
+  }
+
+  .project-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-md);
+  }
+
+  .project-poster {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    position: relative;
+    background-color: #101012;
+    overflow: hidden;
+  }
+
+  /* Film reel borders decorative decoration */
+  .film-border {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.15) 2px, transparent 3px);
+    background-size: 10px 100%;
+    z-index: 5;
+  }
+
+  .top-border {
+    top: 4px;
+  }
+
+  .bottom-border {
+    bottom: 4px;
+  }
+
+  .poster-color-bg {
+    width: 100%;
+    height: 100%;
+    background-image: 
+      linear-gradient(rgba(255, 107, 0, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 107, 0, 0.03) 1px, transparent 1px);
+    background-size: 15px 15px;
+    transition: all var(--transition-normal);
+  }
+
+  .project-card:hover .poster-color-bg {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+
+  .poster-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+  }
+
+  .project-card:hover .poster-overlay {
+    opacity: 1;
+  }
+
+  .play-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: scale(0.8);
+    transition: all var(--transition-normal);
+  }
+
+  .play-btn svg {
+    transform: translateX(1px);
+  }
+
+  .project-card:hover .play-btn {
+    transform: scale(1);
+  }
+
+  .project-info {
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .project-cat {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    margin-bottom: var(--space-xs);
+  }
+
+  .project-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: var(--space-xs);
+    line-height: 1.3;
+  }
+
+  .project-desc {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+  }
+
+  /* Media Queries */
+  @media (min-width: 768px) {
+    .portfolio-header {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+    
+    .projects-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .projects-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

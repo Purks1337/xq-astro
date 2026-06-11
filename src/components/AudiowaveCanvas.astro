@@ -1,0 +1,127 @@
+---
+---
+<canvas id="audiowave-canvas" aria-hidden="true"></canvas>
+
+<script>
+  const canvas = document.getElementById('audiowave-canvas') as HTMLCanvasElement;
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    // Track mouse position
+    let mouse = { x: width / 2, y: height / 2, targetX: width / 2, targetY: height / 2, speed: 0.05 };
+    let scrollY = 0;
+    let targetScrollY = 0;
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      mouse.targetX = e.clientX;
+      mouse.targetY = e.clientY;
+    });
+
+    window.addEventListener('scroll', () => {
+      targetScrollY = window.scrollY;
+    });
+
+    // Design parameters for the waves
+    const waves = [
+      {
+        y: height * 0.7,
+        length: 0.001,
+        amplitude: 60,
+        speed: 0.008,
+        phase: 0,
+        color: 'rgba(255, 107, 0, 0.12)'
+      },
+      {
+        y: height * 0.72,
+        length: 0.002,
+        amplitude: 35,
+        speed: 0.012,
+        phase: Math.PI / 3,
+        color: 'rgba(255, 107, 0, 0.07)'
+      },
+      {
+        y: height * 0.68,
+        length: 0.0008,
+        amplitude: 80,
+        speed: 0.005,
+        phase: Math.PI * 2 / 3,
+        color: 'rgba(255, 107, 0, 0.04)'
+      }
+    ];
+
+    function animate() {
+      if (!ctx) return;
+      requestAnimationFrame(animate);
+
+      // Clear with slight trailing opacity for a tiny motion blur feel
+      ctx.clearRect(0, 0, width, height);
+
+      // Smoothly interpolate mouse coordinates
+      mouse.x += (mouse.targetX - mouse.x) * mouse.speed;
+      mouse.y += (mouse.targetY - mouse.y) * mouse.speed;
+
+      // Smoothly interpolate scroll
+      scrollY += (targetScrollY - scrollY) * 0.1;
+
+      // Draw each wave
+      waves.forEach((wave) => {
+        ctx.beginPath();
+        
+        // Base vertical center of this wave, affected by scroll
+        const baseHeight = wave.y - (scrollY * 0.15);
+
+        for (let i = 0; i < width; i += 2) {
+          // Calculate distance to mouse
+          const dx = i - mouse.x;
+          const dy = baseHeight - mouse.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          
+          // Influence of mouse: increase amplitude and frequency near mouse
+          let mouseInfluence = 0;
+          if (distance < 300) {
+            mouseInfluence = (1 - distance / 300) * 40;
+          }
+
+          // Generate sine value
+          const angle = i * wave.length + wave.phase;
+          const y = baseHeight + Math.sin(angle) * (wave.amplitude + mouseInfluence);
+
+          if (i === 0) {
+            ctx.moveTo(i, y);
+          } else {
+            ctx.lineTo(i, y);
+          }
+        }
+
+        ctx.strokeStyle = wave.color;
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        // Increment phase for movement
+        wave.phase += wave.speed + (mouseInfluence * 0.0001);
+      });
+    }
+
+    animate();
+  }
+</script>
+
+<style>
+  #audiowave-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+    background-color: transparent;
+  }
+</style>

@@ -1,0 +1,270 @@
+---
+---
+<section class="section equipment-section" id="equipment">
+  <div class="container">
+    <div class="equipment-header">
+      <span class="eyebrow">Оборудование</span>
+      <h2>Профессиональное оборудование</h2>
+      <p class="equipment-sub">
+        Качество звука и картинки — наш главный приоритет. Мы используем передовую технику мировых брендов.
+      </p>
+    </div>
+
+    <!-- Tabs Container -->
+    <div class="tabs-container">
+      <div class="tabs-nav" role="tablist" aria-label="Спецификация оборудования">
+        <button class="tab-btn active" role="tab" aria-selected="true" data-tab="audio">
+          Аудиозапись
+        </button>
+        <button class="tab-btn" role="tab" aria-selected="false" data-tab="video">
+          Видеосъемка
+        </button>
+      </div>
+
+      <div class="tabs-content">
+        <!-- Audio Tab Panel -->
+        <div class="tab-panel active" id="tab-audio" role="tabpanel">
+          <div class="eq-grid">
+            <div class="eq-info">
+              <h3>Микрофоны студийного стандарта</h3>
+              <p>
+                Мы используем легендарные микрофоны <strong>AKG</strong> и <strong>SHURE</strong> — мировые стандарты точности и надежности звука. Их выбирают ведущие мировые подкастеры и музыканты для эфиров и студийных сессий.
+              </p>
+              <p>
+                В связке с ними работает профессиональный аудиоинтерфейс <strong>Steinberg UR22C</strong>, передающий чистые басы, прозрачные высокие частоты и детальный голос без задержек.
+              </p>
+            </div>
+            
+            <div class="eq-spec-list">
+              <div class="spec-item glass">
+                <span class="spec-name">Микрофоны</span>
+                <span class="spec-val">Shure SM7B / AKG C214</span>
+              </div>
+              <div class="spec-item glass">
+                <span class="spec-name">Аудиоинтерфейс</span>
+                <span class="spec-val">Steinberg UR22C</span>
+              </div>
+              <div class="spec-item glass">
+                <span class="spec-name">Предусиление</span>
+                <span class="spec-val">Cloudlifter CL-1</span>
+              </div>
+              <div class="spec-item glass">
+                <span class="spec-name">Мониторинг</span>
+                <span class="spec-val">Beyerdynamic DT 770 Pro</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Video Tab Panel -->
+        <div class="tab-panel" id="tab-video" role="tabpanel">
+          <div class="eq-grid">
+            <div class="eq-info">
+              <h3>Четкость и глубина картинки</h3>
+              <p>
+                Для съемки видеоподкастов мы задействуем камеры <strong>Sony A7M3</strong> и <strong>Sony ZV-E10</strong> с качественной оптикой. Это гарантирует сочные цвета, резкую автофокусировку на глазах и красивое размытие фона.
+              </p>
+              <p>
+                Для многокамерной съемки в реальном времени мы используем микшер <strong>AVMATRIX Shark H4 Plus</strong>, позволяющий мгновенно переключать планы, накладывать эффекты и монтировать видео прямо во время эфира.
+              </p>
+            </div>
+
+            <div class="eq-spec-list">
+              <div class="spec-item glass">
+                <span class="spec-name">Камеры</span>
+                <span class="spec-val">Sony A7M3 (Full Frame) / Sony ZV-E10</span>
+              </div>
+              <div class="spec-item glass">
+                <span class="spec-name">Оптика</span>
+                <span class="spec-val">Sony FE 24-70mm f/2.8 GM / Sigma 30mm f/1.4</span>
+              </div>
+              <div class="spec-item glass">
+                <span class="spec-name">Видеомикшер</span>
+                <span class="spec-val">AVMATRIX Shark H4 Plus</span>
+              </div>
+              <div class="spec-item glass">
+                <span class="spec-name">Освещение</span>
+                <span class="spec-val">Aputure Amaran 200d / RGB LED Панели</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tabPanels = document.querySelectorAll('.tab-panel');
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Deactivate other buttons
+      tabBtns.forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      // Activate clicked button
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+
+      const tabId = btn.getAttribute('data-tab');
+
+      // Show matching panel
+      tabPanels.forEach(panel => {
+        if (panel.id === `tab-${tabId}`) {
+          panel.classList.add('active');
+        } else {
+          panel.classList.remove('active');
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .equipment-section {
+    background-color: var(--color-bg-darkest);
+    border-top: 1px solid var(--color-border);
+    position: relative;
+  }
+
+  .equipment-header {
+    margin-bottom: var(--space-xxl);
+    max-width: 600px;
+  }
+
+  .equipment-sub {
+    font-size: 1.05rem;
+    color: var(--color-text-secondary);
+  }
+
+  .tabs-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+  }
+
+  .tabs-nav {
+    display: flex;
+    border-bottom: 1px solid var(--color-border);
+    gap: var(--space-xl);
+  }
+
+  .tab-btn {
+    background: transparent;
+    border: none;
+    color: var(--color-text-secondary);
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding-bottom: var(--space-md);
+    cursor: pointer;
+    position: relative;
+    transition: color var(--transition-fast);
+  }
+
+  .tab-btn:hover {
+    color: var(--color-primary);
+  }
+
+  .tab-btn::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--color-primary);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform var(--transition-normal);
+  }
+
+  .tab-btn.active {
+    color: var(--color-primary);
+  }
+
+  .tab-btn.active::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  .tabs-content {
+    position: relative;
+  }
+
+  .tab-panel {
+    display: none;
+  }
+
+  .tab-panel.active {
+    display: block;
+    animation: fadeIn 0.4s ease forwards;
+  }
+
+  .eq-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+    align-items: center;
+  }
+
+  .eq-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .eq-info h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  .eq-info p {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .eq-spec-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .spec-item {
+    padding: var(--space-md) var(--space-lg);
+    border-radius: var(--border-radius-md);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .spec-name {
+    font-family: var(--font-display);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+  }
+
+  .spec-val {
+    font-size: 1.05rem;
+    font-weight: 600;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Media Queries */
+  @media (min-width: 768px) {
+    .eq-grid {
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: var(--space-xxl);
+    }
+  }
+</style>

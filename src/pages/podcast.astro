@@ -14,36 +14,52 @@ import VideoModal from '../components/VideoModal.astro';
   <!-- Podcast Hero -->
   <section class="podcast-hero">
     <div class="container hero-container">
-      <div class="hero-text">
-        <span class="eyebrow">Студия подкастов</span>
-        <h1>Снимайте подкасты в лучшем качестве</h1>
-        <p class="hero-sub">
-          Уютное пространство-трансформер в Екатеринбурге. Световые сетапы под любой стиль, ретро-телевизоры, гринскрин и премиальный звук Shure SM7B. Запись аудио и видео «под ключ».
-        </p>
-        <div class="hero-ctas">
-          <a href="#contact" class="btn btn-primary">Забронировать дату</a>
-          <a href="tel:+79923410520" class="btn btn-secondary">Позвонить</a>
+      
+      <!-- Asymmetric Offset Typography Layout -->
+      <div class="hero-grid">
+        <div class="hero-col-left">
+          <span class="eyebrow">Студия подкастов //</span>
+          <h1 class="hero-title">Снимайте подкасты в лучшем качестве</h1>
+        </div>
+        
+        <div class="hero-col-right">
+          <p class="hero-desc">
+            Уютное пространство-трансформер в Екатеринбурге. Световые сетапы под любой стиль, ретро-телевизоры, гринскрин и премиальный звук Shure SM7B. Запись аудио и видео «под ключ».
+          </p>
+          <div class="hero-ctas">
+            <a href="#contact" class="btn btn-primary">Забронировать дату</a>
+            <a href="tel:+79923410520" class="btn btn-secondary">Позвонить</a>
+          </div>
         </div>
       </div>
 
-      <div class="hero-media-wrapper">
-        <div class="viewfinder-frame">
-          <span class="vf-corner top-left"></span>
-          <span class="vf-corner top-right"></span>
-          <span class="vf-corner bottom-left"></span>
-          <span class="vf-corner bottom-right"></span>
-          <span class="vf-rec-dot"></span>
-          <span class="vf-rec-text">ЭФИР</span>
+      <!-- Cinematic Monitor Viewport -->
+      <div class="cinematic-viewport-wrapper">
+        <div class="camera-hud">
+          <span class="hud-corner top-left"></span>
+          <span class="hud-corner top-right"></span>
+          <span class="hud-corner bottom-left"></span>
+          <span class="hud-corner bottom-right"></span>
           
-          <div class="studio-card">
-            <div class="studio-poster-bg"></div>
-            <div class="studio-overlay">
-              <span class="studio-badge">Екатеринбург, Ботаническая 19</span>
-              <h3>Ламповая атмосфера 24/7</h3>
+          <div class="hud-bar top-bar">
+            <span class="hud-rec"><span class="rec-dot"></span>ЗАПИСЬ</span>
+            <span class="hud-ratio">Екатеринбург, Ботаническая 19</span>
+          </div>
+          
+          <div class="hud-bar bottom-bar">
+            <span class="hud-fps">ЛАМПОВАЯ АТМОСФЕРА 24/7</span>
+            <span class="hud-tc">00:00:00:00</span>
+          </div>
+
+          <div class="viewport-content">
+            <div class="poster-media">
+              <div class="grid-overlay"></div>
+              <div class="center-target"></div>
             </div>
           </div>
         </div>
       </div>
+
     </div>
   </section>
 
@@ -100,142 +116,183 @@ import VideoModal from '../components/VideoModal.astro';
 
 <style>
   .podcast-hero {
-    min-height: 90vh;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-top: 120px;
+    padding-top: 150px;
     padding-bottom: var(--space-xxl);
     position: relative;
     overflow: hidden;
   }
 
   .hero-container {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-xxl);
-    align-items: center;
-  }
-
-  .hero-text {
     display: flex;
     flex-direction: column;
+    gap: var(--space-xxl);
+  }
+
+  /* Asymmetric Offset Grid */
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+    align-items: flex-start;
+    text-align: left;
     z-index: 10;
   }
 
-  .hero-sub {
-    font-size: clamp(1.1rem, 2vw, 1.3rem);
+  .hero-col-left {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero-title {
+    font-size: clamp(2.6rem, 7vw, 5.2rem);
+    font-weight: 800;
+    line-height: 0.95;
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+    color: var(--color-text-primary);
+  }
+
+  .hero-col-right {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    justify-content: flex-end;
+  }
+
+  .hero-desc {
+    font-size: clamp(1.0rem, 1.4vw, 1.15rem);
     line-height: 1.6;
-    margin-top: var(--space-lg);
-    margin-bottom: var(--space-xxl);
-    max-width: 550px;
+    color: var(--color-text-secondary);
+    max-width: 540px;
   }
 
   .hero-ctas {
     display: flex;
-    flex-direction: column;
     gap: var(--space-md);
   }
 
-  /* Media Visual container */
-  .hero-media-wrapper {
+  .hero-ctas .btn {
+    padding: 0.8rem 1.6rem;
+    font-size: 0.78rem;
+  }
+
+  /* Cinematic Monitor Viewport */
+  .cinematic-viewport-wrapper {
     width: 100%;
-    display: flex;
-    justify-content: center;
     z-index: 10;
+    margin-top: var(--space-md);
   }
 
-  .viewfinder-frame {
-    width: 100%;
-    max-width: 600px;
-    aspect-ratio: 16 / 9;
-    border: 1px solid rgba(255, 255, 255, 0.04);
+  .camera-hud {
     position: relative;
-    padding: var(--space-md);
-    background-color: rgba(255, 255, 255, 0.01);
+    width: 100%;
+    aspect-ratio: 21 / 9;
+    border: 1px solid var(--color-border);
+    padding: 24px;
+    background-color: rgba(12, 14, 18, 0.4);
+    box-shadow: var(--shadow-md);
   }
 
-  .vf-corner {
+  .hud-corner {
     position: absolute;
-    width: 16px;
-    height: 16px;
-    border-color: rgba(255, 255, 255, 0.3);
+    width: 12px;
+    height: 12px;
+    border-color: rgba(255, 255, 255, 0.2);
     border-style: solid;
+    transition: all var(--transition-normal);
   }
 
-  .top-left { top: 4px; left: 4px; border-width: 1.5px 0 0 1.5px; }
-  .top-right { top: 4px; right: 4px; border-width: 1.5px 1.5px 0 0; }
-  .bottom-left { bottom: 4px; left: 4px; border-width: 0 0 1.5px 1.5px; }
-  .bottom-right { bottom: 4px; right: 4px; border-width: 0 1.5px 1.5px 0; }
+  .camera-hud:hover .hud-corner {
+    border-color: var(--color-primary);
+    width: 18px;
+    height: 18px;
+  }
 
-  .vf-rec-dot {
+  .top-left { top: 6px; left: 6px; border-width: 1px 0 0 1px; }
+  .top-right { top: 6px; right: 6px; border-width: 1px 1px 0 0; }
+  .bottom-left { bottom: 6px; left: 6px; border-width: 0 0 1px 1px; }
+  .bottom-right { bottom: 6px; right: 6px; border-width: 0 1px 1px 0; }
+
+  .hud-bar {
     position: absolute;
-    top: 14px;
-    left: 14px;
-    width: 8px;
-    height: 8px;
-    background-color: var(--color-primary);
-    border-radius: 50%;
-    animation: pulse 1.5s infinite;
-  }
-
-  .vf-rec-text {
-    position: absolute;
-    top: 10px;
-    left: 28px;
-    font-family: var(--font-display);
-    font-size: 0.65rem;
-    font-weight: 700;
-    color: var(--color-text-primary);
-    letter-spacing: 0.1em;
-  }
-
-  .studio-card {
-    width: 100%;
-    height: 100%;
-    border-radius: var(--border-radius-sm);
-    overflow: hidden;
-    position: relative;
-    background: #101012;
-  }
-
-  .studio-poster-bg {
-    width: 100%;
-    height: 100%;
-    background-image: 
-      linear-gradient(rgba(255, 107, 0, 0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 107, 0, 0.04) 1px, transparent 1px);
-    background-size: 20px 20px;
-    opacity: 0.6;
-  }
-
-  .studio-overlay {
-    position: absolute;
-    bottom: var(--space-lg);
-    left: var(--space-lg);
-    z-index: 2;
+    width: calc(100% - 48px);
     display: flex;
-    flex-direction: column;
-    gap: 4px;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--color-text-muted);
+    letter-spacing: 0.1em;
+    z-index: 5;
   }
 
-  .studio-badge {
-    align-self: flex-start;
-    background-color: rgba(255, 107, 0, 0.1);
-    color: var(--color-primary);
-    border: 1px solid var(--color-primary);
-    font-size: 0.75rem;
-    font-family: var(--font-display);
-    padding: 2px 8px;
-    border-radius: 4px;
-    text-transform: uppercase;
-    font-weight: 600;
-    letter-spacing: 0.05em;
+  .top-bar { top: 10px; }
+  .bottom-bar { bottom: 10px; }
+
+  .hud-rec {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--color-text-primary);
   }
 
-  .studio-overlay h3 {
-    font-size: 1.3rem;
-    margin: 0;
+  .rec-dot {
+    width: 6px;
+    height: 6px;
+    background-color: #ef4444;
+    border-radius: 50%;
+    animation: flash 1.5s infinite;
+  }
+
+  .viewport-content {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    background-color: #07090c;
+  }
+
+  .poster-media {
+    width: 100%;
+    height: 100%;
+    opacity: 0.6;
+    background-image: url('/images/studio-hero.jpg');
+    background-size: cover;
+    background-position: center;
+    transition: all var(--transition-slow);
+  }
+
+  .grid-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image: 
+      linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 33.33% 33.33%;
+  }
+
+  .center-target {
+    position: absolute;
+    top: 50%; left: 50%; width: 12px; height: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .center-target::before, .center-target::after {
+    content: '';
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.15);
+  }
+  .center-target::before { top: 50%; left: -6px; width: 24px; height: 1px; }
+  .center-target::after { left: 50%; top: -6px; width: 1px; height: 24px; }
+
+  @keyframes flash {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
   }
 
   /* Locations Styles */
@@ -277,18 +334,15 @@ import VideoModal from '../components/VideoModal.astro';
   }
 
   .location-transformer {
-    background-image: 
-      linear-gradient(135deg, rgba(255, 107, 0, 0.03) 25%, transparent 25%), 
-      linear-gradient(225deg, rgba(255, 107, 0, 0.03) 25%, transparent 25%);
-    background-size: 30px 30px;
+    background-image: url('/images/studio-transformer.jpg');
+    background-size: cover;
+    background-position: center;
   }
 
   .location-lounge {
-    background-image: 
-      radial-gradient(rgba(255, 107, 0, 0.02) 20%, transparent 20%),
-      radial-gradient(rgba(255, 107, 0, 0.02) 20%, transparent 20%);
-    background-size: 20px 20px;
-    background-position: 0 0, 10px 10px;
+    background-image: url('/images/studio-lounge.jpg');
+    background-size: cover;
+    background-position: center;
   }
 
   .loc-info {
@@ -306,16 +360,11 @@ import VideoModal from '../components/VideoModal.astro';
     color: var(--color-text-secondary);
   }
 
-  @keyframes pulse {
-    0% { opacity: 0.3; }
-    50% { opacity: 1; }
-    100% { opacity: 0.3; }
-  }
-
   /* Media Queries */
-  @media (min-width: 480px) {
-    .hero-ctas {
-      flex-direction: row;
+  @media (min-width: 1024px) {
+    .hero-grid {
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: var(--space-xxl);
     }
   }
 
@@ -325,10 +374,17 @@ import VideoModal from '../components/VideoModal.astro';
     }
   }
 
-  @media (min-width: 1024px) {
-    .hero-container {
-      grid-template-columns: 1fr 1fr;
-      gap: var(--space-xxl);
+  @media (max-width: 767px) {
+    .camera-hud {
+      aspect-ratio: 16 / 9;
+      padding: 12px;
+    }
+    .hud-bar {
+      display: none;
+    }
+    .hero-ctas {
+      flex-direction: column;
+      width: 100%;
     }
   }
 </style>

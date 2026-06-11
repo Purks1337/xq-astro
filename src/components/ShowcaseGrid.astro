@@ -3,46 +3,32 @@ const categories = ["Все", "Реклама", "Клипы", "Трансляц�
 
 const projects = [
   {
-    title: "Фирменная Реклама бренда X",
+    title: "Рекламный ролик Золотое Яблоко",
     category: "Реклама",
-    desc: "Продвижение технологической платформы. Сочетание реальных съемок и 3D-графики.",
-    videoUrl: "https://kinescope.io/embed/placeholder-ad",
-    thumbnail: "rgba(224, 150, 92, 0.02)"
+    desc: "Динамичный и эстетичный рекламный ролик для сети парфюмерии и косметики. Профессиональный монтаж, работа со светом и цветом.",
+    videoUrl: "https://kinescope.io/embed/b2cDjUfESLQUpa3LLbZ5LZ",
+    thumbnail: "/images/apple-poster.jpg"
   },
   {
-    title: "Музыкальный клип артиста Y",
-    category: "Клипы",
-    desc: "Атмосферный клип в стиле нео-нуар с акцентом на цветовую палибру.",
-    videoUrl: "https://kinescope.io/embed/placeholder-clip",
-    thumbnail: "rgba(224, 150, 92, 0.02)"
+    title: "Промо-ролик ALCO",
+    category: "Реклама",
+    desc: "Стильный и атмосферный промо-ролик с глубокой игрой теней, выверенной композицией кадров и премиальным качеством съемки.",
+    videoUrl: "https://kinescope.io/embed/bP76PynKdWHrdwDZbjthUZ",
+    thumbnail: "/images/alco-poster.jpg"
   },
   {
-    title: "Онлайн Трансляция События",
-    category: "Трансляции",
-    desc: "Многокамерная прямая трансляция финала соревнований с выводом статистики.",
-    videoUrl: "https://kinescope.io/embed/placeholder-stream",
-    thumbnail: "rgba(224, 150, 92, 0.02)"
-  },
-  {
-    title: "Документальный проект «Урал»",
+    title: "Имиджевый ролик ЦБО",
     category: "Кино",
-    desc: "История людей искусства на Урале. Полный цикл производства.",
-    videoUrl: "https://kinescope.io/embed/placeholder-doc",
-    thumbnail: "rgba(224, 150, 92, 0.02)"
+    desc: "Имиджевый фильм для Центра бизнес-образования. Интервью, репортажная съемка, динамичные переходы и компиляция лучших кадров.",
+    videoUrl: "https://kinescope.io/embed/qHKGrDaBEmQaQTjgi1iSkp",
+    thumbnail: "/images/cbo-poster.jpg"
   },
   {
-    title: "Промо-ролик для стартапа",
-    category: "Реклама",
-    desc: "Динамичный видеоролик, объясняющий принципы работы приложения за 60 секунд.",
-    videoUrl: "https://kinescope.io/embed/placeholder-promo",
-    thumbnail: "rgba(224, 150, 92, 0.02)"
-  },
-  {
-    title: "3D Презентация Девайса",
-    category: "Анимация",
-    desc: "Реалистичный рендер и симуляция физики для технологического продукта.",
-    videoUrl: "https://kinescope.io/embed/placeholder-animation",
-    thumbnail: "rgba(224, 150, 92, 0.02)"
+    title: "Музыкальный клип Моя Банда",
+    category: "Клипы",
+    desc: "Атмосферный музыкальный клип. Креативная режиссура, неоновые локации, сюжетные линии и глубокая художественная цветокоррекция.",
+    videoUrl: "https://kinescope.io/embed/7QcNKLymh9WcaB3Li3fqrR",
+    thumbnail: "/images/banda-poster.jpg"
   }
 ];
 ---
@@ -82,7 +68,7 @@ const projects = [
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3" /></svg>
               </div>
             </div>
-            <div class="poster-color-bg" style={`background-color: ${project.thumbnail}`}></div>
+            <div class="poster-image-bg" style={`background-image: url('${project.thumbnail}')`}></div>
           </div>
           <div class="project-info">
             <span class="project-cat">{project.category}</span>
@@ -217,17 +203,16 @@ const projects = [
   .top-border { top: 2px; }
   .bottom-border { bottom: 2px; }
 
-  .poster-color-bg {
+  .poster-image-bg {
     width: 100%;
     height: 100%;
-    background-image: 
-      linear-gradient(rgba(224, 150, 92, 0.02) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(224, 150, 92, 0.02) 1px, transparent 1px);
-    background-size: 20px 20px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     transition: all var(--transition-normal);
   }
 
-  .project-card:hover .poster-color-bg {
+  .project-card:hover .poster-image-bg {
     transform: scale(1.03);
     opacity: 0.9;
   }

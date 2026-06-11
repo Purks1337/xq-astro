@@ -5,113 +5,137 @@ interface Props {
 }
 
 const { 
-  title = "Рассчитайте ваш проект", 
-  subtitle = "Заполните форму ниже, и мы свяжемся с вами в течение часа для детального обсуждения." 
+  title = "Рассчитать стоимость проекта", 
+  subtitle = "Заполните поля ниже, и мы свяжемся с вами в течение часа с детальным коммерческим предложением." 
 } = Astro.props;
 ---
 
 <section class="section contact-section" id="contact">
   <div class="container">
     <div class="contact-grid">
+      
+      <!-- Left Info Block -->
       <div class="contact-info-block">
-        <span class="eyebrow">Контакты</span>
+        <span class="eyebrow">СВЯЗАТЬСЯ //</span>
         <h2>Давайте создавать вместе</h2>
-        <p class="contact-lead-text">
-          У вас есть идея для проекта, клипа, рекламы или подкаста? Мы поможем реализовать её на высшем уровне. Наша команда сопровождает проект от написания сценария до финального монтажа.
+        <p class="contact-lead">
+          Мы открыты для съемок, записи подкастов и проектов любой сложности. Напишите нам, чтобы обсудить детали и составить смету.
         </p>
 
-        <div class="quick-stats">
-          <div class="stat-card">
-            <span class="stat-num">10+</span>
-            <span class="stat-label">Лет опыта в индустрии</span>
+        <div class="contact-details">
+          <div class="detail-row">
+            <span class="detail-label">Адрес студии</span>
+            <span class="detail-val">Екатеринбург, ул. Ботаническая 19</span>
           </div>
-          <div class="stat-card">
-            <span class="stat-num">100%</span>
-            <span class="stat-label">Качество без компромиссов</span>
+          <div class="detail-row">
+            <span class="detail-label">Телефон</span>
+            <a href="tel:+79923410520" class="detail-val">+7 992 341-05-20</a>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Email</span>
+            <a href="mailto:hvaliteq@gmail.com" class="detail-val">hvaliteq@gmail.com</a>
           </div>
         </div>
       </div>
 
+      <!-- Traditional Redesigned Form Block -->
       <div class="contact-form-block glass" id="form-container">
         <h3>{title}</h3>
-        <p class="form-sub">{subtitle}</p>
+        <p class="form-desc">{subtitle}</p>
 
         <form id="project-form" class="project-form" novalidate>
+          
+          <!-- Category Selector Pills -->
           <div class="form-group">
-            <label for="name-input" class="form-label">Как к вам обращаться?</label>
-            <input 
-              type="text" 
-              id="name-input" 
-              name="name" 
-              class="form-input" 
-              placeholder="Ваше имя" 
-              required
-            />
-            <span class="error-msg" id="name-error">Пожалуйста, введите ваше имя</span>
+            <span class="form-label-mono">Выбрать формат //</span>
+            <div class="format-pills" role="group" aria-label="Формат проекта">
+              <button type="button" class="pill-btn active" data-value="видеопроизводство">Видеопроизводство</button>
+              <button type="button" class="pill-btn" data-value="студия подкастов">Студия подкастов</button>
+              <button type="button" class="pill-btn" data-value="реклама и клипы">Реклама & Клипы</button>
+              <button type="button" class="pill-btn" data-value="монтаж и графика">Монтаж & Графика</button>
+            </div>
+            <!-- Hidden input to hold chosen format value -->
+            <input type="hidden" name="project_format" id="format-hidden-input" value="видеопроизводство" />
           </div>
 
-          <div class="form-group">
-            <label for="phone-input" class="form-label">Номер телефона</label>
-            <input 
-              type="tel" 
-              id="phone-input" 
-              name="phone" 
-              class="form-input" 
-              placeholder="+7 (999) 000-00-00" 
-              required
-            />
-            <span class="error-msg" id="phone-error">Пожалуйста, введите корректный номер телефона</span>
+          <!-- Structured Form Fields -->
+          <div class="form-fields-grid">
+            <div class="form-group">
+              <label for="name-input" class="form-label-mono">01 // Ваше имя</label>
+              <input 
+                type="text" 
+                id="name-input" 
+                name="name" 
+                class="form-input" 
+                placeholder="Иван Иванов" 
+                required 
+              />
+              <span class="error-msg" id="name-error">Пожалуйста, укажите имя</span>
+            </div>
+
+            <div class="form-group">
+              <label for="phone-input" class="form-label-mono">02 // Номер телефона</label>
+              <input 
+                type="tel" 
+                id="phone-input" 
+                name="phone" 
+                class="form-input" 
+                placeholder="+7 (999) 000-00-00" 
+                required 
+              />
+              <span class="error-msg" id="phone-error">Введите корректный номер телефона</span>
+            </div>
+
+            <div class="form-group">
+              <label for="email-input" class="form-label-mono">03 // Электронная почта</label>
+              <input 
+                type="email" 
+                id="email-input" 
+                name="email" 
+                class="form-input" 
+                placeholder="ivan@example.ru" 
+                required 
+              />
+              <span class="error-msg" id="email-error">Введите корректный адрес почты</span>
+            </div>
+
+            <div class="form-group">
+              <label for="message-textarea" class="form-label-mono">04 // Описание проекта</label>
+              <textarea 
+                id="message-textarea" 
+                name="message" 
+                class="form-textarea" 
+                placeholder="Расскажите о вашей задаче, хронометраже, целях съемок..." 
+                rows="3"
+              ></textarea>
+            </div>
           </div>
 
-          <div class="form-group">
-            <label for="email-input" class="form-label">Email</label>
-            <input 
-              type="email" 
-              id="email-input" 
-              name="email" 
-              class="form-input" 
-              placeholder="example@mail.ru" 
-              required
-            />
-            <span class="error-msg" id="email-error">Пожалуйста, введите корректный Email адрес</span>
-          </div>
-
-          <div class="form-group">
-            <label for="message-textarea" class="form-label">Опишите вашу идею</label>
-            <textarea 
-              id="message-textarea" 
-              name="message" 
-              class="form-textarea" 
-              rows="4" 
-              placeholder="Расскажите о вашем проекте (тип видео, хронометраж, цели)..."
-            ></textarea>
-          </div>
-
-          <div class="form-group agreement-group">
-            <label class="form-checkbox-label">
+          <div class="form-agreement">
+            <label class="checkbox-label">
               <input type="checkbox" id="agreement-checkbox" name="agreement" required />
-              <span>Я согласен с <a href="/privacy" target="_blank" class="accent-link">политикой конфиденциальности</a></span>
+              <span class="checkbox-text">Я согласен с <a href="/privacy" target="_blank" class="accent-link">политикой конфиденциальности</a></span>
             </label>
-            <span class="error-msg" id="agreement-error">Необходимо согласиться с политикой конфиденциальности</span>
+            <span class="error-msg" id="agreement-error">Необходимо ваше согласие</span>
           </div>
 
           <button type="submit" class="btn btn-primary submit-btn">
-            Отправить заявку
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
+            ОТПРАВИТЬ ЗАЯВКУ //
           </button>
         </form>
 
-        <!-- Success Message (hidden by default) -->
+        <!-- Success Screen Overlay -->
         <div class="success-overlay" id="success-overlay">
           <div class="success-content">
             <div class="success-icon">
-              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
             </div>
-            <h4>Спасибо за заявку!</h4>
-            <p>Мы получили ваши данные и свяжемся с вами в течение часа для обсуждения деталей вашего проекта.</p>
+            <h4>Заявка успешно отправлена!</h4>
+            <p>Мы получили вашу информацию и свяжемся с вами в течение часа для детального обсуждения.</p>
             <button id="reset-form-btn" class="btn btn-secondary btn-sm">Отправить еще раз</button>
           </div>
         </div>
+
       </div>
     </div>
   </div>
@@ -125,50 +149,66 @@ const {
   const agreement = document.getElementById('agreement-checkbox') as HTMLInputElement;
   const successOverlay = document.getElementById('success-overlay');
   const resetBtn = document.getElementById('reset-form-btn');
+  const formatInput = document.getElementById('format-hidden-input') as HTMLInputElement;
+  const pillBtns = document.querySelectorAll('.pill-btn');
 
-  // Input elements validation
-  function validateInput(input: HTMLInputElement, errorElId: string, customCheck?: () => boolean): boolean {
-    const errorEl = document.getElementById(errorElId);
-    let isValid = input.checkValidity();
-    
-    if (customCheck) {
-      isValid = isValid && customCheck();
-    }
+  // Format Pills Interaction
+  pillBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      pillBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const val = btn.getAttribute('data-value');
+      if (val && formatInput) {
+        formatInput.value = val;
+      }
+    });
+  });
+
+  function validateField(input: HTMLInputElement, errorId: string): boolean {
+    const errorEl = document.getElementById(errorId);
+    const isValid = input.checkValidity();
 
     if (!isValid) {
       input.classList.add('invalid');
-      if (errorEl) errorEl.classList.add('show');
+      errorEl?.classList.add('show');
     } else {
       input.classList.remove('invalid');
-      if (errorEl) errorEl.classList.remove('show');
+      errorEl?.classList.remove('show');
     }
-
     return isValid;
   }
 
-  // Simple validations on blur
-  nameInput?.addEventListener('blur', () => validateInput(nameInput, 'name-error'));
-  phoneInput?.addEventListener('blur', () => validateInput(phoneInput, 'phone-error'));
-  emailInput?.addEventListener('blur', () => validateInput(emailInput, 'email-error'));
-  agreement?.addEventListener('change', () => validateInput(agreement, 'agreement-error'));
+  nameInput?.addEventListener('blur', () => validateField(nameInput, 'name-error'));
+  phoneInput?.addEventListener('blur', () => validateField(phoneInput, 'phone-error'));
+  emailInput?.addEventListener('blur', () => validateField(emailInput, 'email-error'));
+  agreement?.addEventListener('change', () => {
+    const err = document.getElementById('agreement-error');
+    if (agreement.checked) {
+      err?.classList.remove('show');
+    } else {
+      err?.classList.add('show');
+    }
+  });
 
-  // Form submit handler
   form?.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    const isNameValid = validateInput(nameInput, 'name-error');
-    const isPhoneValid = validateInput(phoneInput, 'phone-error');
-    const isEmailValid = validateInput(emailInput, 'email-error');
-    const isAgreementValid = validateInput(agreement, 'agreement-error');
+    const isNameValid = validateField(nameInput, 'name-error');
+    const isPhoneValid = validateField(phoneInput, 'phone-error');
+    const isEmailValid = validateField(emailInput, 'email-error');
+    
+    const isAgreementValid = agreement.checked;
+    const agreementError = document.getElementById('agreement-error');
+    if (!isAgreementValid) {
+      agreementError?.classList.add('show');
+    } else {
+      agreementError?.classList.remove('show');
+    }
 
     if (isNameValid && isPhoneValid && isEmailValid && isAgreementValid) {
-      // Collect form data
       const formData = new FormData(form);
-      const data = Object.fromEntries(formData);
-      
-      console.log('Form submitted successfully:', data);
+      console.log('Form submission completed:', Object.fromEntries(formData));
 
-      // Show success screen with transition
       if (successOverlay) {
         successOverlay.classList.add('active');
       }
@@ -178,10 +218,17 @@ const {
   resetBtn?.addEventListener('click', () => {
     form?.reset();
     successOverlay?.classList.remove('active');
-    // Remove invalid classes
-    nameInput.classList.remove('invalid');
-    phoneInput.classList.remove('invalid');
-    emailInput.classList.remove('invalid');
+    
+    // Clear validation styles
+    document.querySelectorAll('.form-input').forEach(el => el.classList.remove('invalid'));
+    document.querySelectorAll('.error-msg').forEach(el => el.classList.remove('show'));
+    
+    // Reset format pills
+    pillBtns.forEach(b => b.classList.remove('active'));
+    pillBtns[0].classList.add('active');
+    if (formatInput) {
+      formatInput.value = 'видеопроизводство';
+    }
   });
 </script>
 
@@ -190,98 +237,215 @@ const {
     background-color: var(--color-bg-darkest);
     border-top: 1px solid var(--color-border);
     position: relative;
-    overflow: hidden;
   }
 
   .contact-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--space-xxl);
-    align-items: center;
+    align-items: flex-start;
   }
 
   .contact-info-block {
     display: flex;
     flex-direction: column;
+    gap: var(--space-md);
   }
 
-  .contact-lead-text {
-    font-size: 1.1rem;
+  .contact-lead {
+    font-size: 1.05rem;
     line-height: 1.7;
-    margin-bottom: var(--space-xl);
-  }
-
-  .quick-stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-lg);
-  }
-
-  .stat-card {
-    background-color: var(--color-bg-dark);
-    border: 1px solid var(--color-border);
-    border-radius: var(--border-radius-md);
-    padding: var(--space-lg);
-  }
-
-  .stat-num {
-    display: block;
-    font-family: var(--font-display);
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: var(--color-primary);
-    line-height: 1;
-    margin-bottom: var(--space-xs);
-  }
-
-  .stat-label {
-    font-size: 0.85rem;
     color: var(--color-text-secondary);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    max-width: 480px;
   }
 
+  .contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    margin-top: var(--space-md);
+  }
+
+  .detail-row {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .detail-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .detail-val {
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: var(--color-text-primary);
+  }
+
+  .detail-val:hover {
+    color: var(--color-accent);
+  }
+
+  /* Traditional structured Form style */
   .contact-form-block {
     position: relative;
-    border-radius: var(--border-radius-lg);
+    border-radius: var(--border-radius-md);
     padding: var(--space-xl);
     overflow: hidden;
     box-shadow: var(--shadow-md);
   }
 
   .contact-form-block h3 {
+    font-size: 1.5rem;
     margin-bottom: var(--space-xxs);
+    letter-spacing: -0.01em;
   }
 
-  .form-sub {
-    font-size: 0.9rem;
+  .form-desc {
+    font-size: 0.88rem;
+    color: var(--color-text-secondary);
     margin-bottom: var(--space-xl);
+    line-height: 1.5;
   }
 
   .project-form {
     display: flex;
     flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .form-label-mono {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-xs);
+  }
+
+  /* Format Pills */
+  .format-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    margin-top: var(--space-xs);
+  }
+
+  .pill-btn {
+    background: transparent;
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-sm);
+    color: var(--color-text-secondary);
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 0.4rem 1.0rem;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+  }
+
+  .pill-btn:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+
+  .pill-btn.active {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+
+  /* Fields Layout Grid */
+  .form-fields-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .form-input {
+    width: 100%;
+    background: var(--color-bg-darkest);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-sm);
+    padding: 0.85rem 1.0rem;
+    color: var(--color-text-primary);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 400;
+    transition: all var(--transition-normal);
+  }
+
+  .form-input::placeholder {
+    color: var(--color-text-muted);
+  }
+
+  .form-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    background: rgba(255, 255, 255, 0.01);
+  }
+
+  .form-input.invalid {
+    border-color: #ef4444;
+    background: rgba(239, 68, 68, 0.02);
+  }
+
+  .form-textarea {
+    width: 100%;
+    background: var(--color-bg-darkest);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-sm);
+    padding: 0.85rem 1.0rem;
+    color: var(--color-text-primary);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 400;
+    resize: vertical;
+    transition: all var(--transition-normal);
+  }
+
+  .form-textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    background: rgba(255, 255, 255, 0.01);
   }
 
   .error-msg {
     display: none;
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     color: #ef4444;
-    margin-top: var(--space-xs);
+    margin-top: 4px;
+    font-family: var(--font-mono);
   }
 
   .error-msg.show {
     display: block;
   }
 
-  .form-input.invalid, .form-textarea.invalid {
-    border-color: #ef4444;
-    background: rgba(239, 68, 68, 0.02);
+  .form-agreement {
+    margin-top: var(--space-xs);
   }
 
-  .agreement-group {
-    margin-top: var(--space-sm);
-    margin-bottom: var(--space-xl);
+  .checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    cursor: pointer;
+  }
+
+  .checkbox-label input {
+    margin-top: 0.3rem;
+  }
+
+  .checkbox-text {
+    font-size: 0.82rem;
+    color: var(--color-text-secondary);
+    line-height: 1.4;
   }
 
   .accent-link {
@@ -289,21 +453,16 @@ const {
     text-decoration: underline;
   }
 
-  .accent-link:hover {
-    color: var(--color-primary-hover);
-  }
-
   .submit-btn {
-    width: 100%;
+    align-self: flex-start;
+    padding: 0.85rem 2.0rem;
+    font-size: 0.78rem;
   }
 
   /* Success screen style */
   .success-overlay {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 0; left: 0; width: 100%; height: 100%;
     background-color: var(--color-bg-card);
     z-index: 20;
     display: flex;
@@ -326,40 +485,38 @@ const {
     flex-direction: column;
     align-items: center;
     gap: var(--space-md);
-    max-width: 350px;
+    max-width: 380px;
   }
 
   .success-icon {
-    width: 80px;
-    height: 80px;
+    width: 54px;
+    height: 54px;
     border-radius: 50%;
-    background-color: rgba(255, 107, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.03);
     color: var(--color-primary);
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: var(--space-xs);
-    border: 2px solid var(--color-primary);
-    box-shadow: 0 0 15px rgba(255, 107, 0, 0.2);
+    border: 1px solid var(--color-primary);
   }
 
   .success-content h4 {
-    font-size: 1.5rem;
+    font-size: 1.35rem;
     font-weight: 700;
   }
 
   .success-content p {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     color: var(--color-text-secondary);
+    line-height: 1.6;
   }
 
   /* Media Queries */
   @media (min-width: 1024px) {
     .contact-grid {
-      grid-template-columns: 1fr 1.1fr;
+      grid-template-columns: 0.8fr 1.2fr;
       gap: var(--space-xxl);
     }
-    
     .contact-form-block {
       padding: var(--space-xxl);
     }

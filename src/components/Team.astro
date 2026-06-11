@@ -9,7 +9,7 @@ const team = [
   {
     name: "Олег",
     role: "CCO / Design",
-    desc: "Более 11 лет опыта в графическом дизайне, WEB, UX/UI.",
+    desc: "Более 11 лет опыта в дизайне, WEB, UX/UI. Собираю интерфейсы.",
     initials: "O"
   },
   {
@@ -27,7 +27,7 @@ const team = [
   {
     name: "Валерий",
     role: "CCO / Commercial",
-    desc: "Коммерческий директор. Продажи и коммуникация с ключевыми клиентами.",
+    desc: "Коммерческий директор. Продажи и коммуникация с ключевыми партнерами.",
     initials: "V"
   },
   {
@@ -39,7 +39,7 @@ const team = [
   {
     name: "Святослав",
     role: "Менеджер проектов",
-    desc: "Организация съемочного процесса, контроль сроков и бюджета.",
+    desc: "Организация съемочного процесса, контроль соблюдения сроков и бюджета.",
     initials: "S"
   },
   {
@@ -54,10 +54,10 @@ const team = [
 <section class="section team-section" id="team">
   <div class="container">
     <div class="team-header">
-      <span class="eyebrow">Команда</span>
+      <span class="eyebrow">Команда //</span>
       <h2>Наша команда</h2>
       <p class="team-subtitle">
-        Сплоченный коллектив профессионалов с опытом работы в кино, телевидении и интернет-медиа от 5 до 20 лет.
+        Сплоченный коллектив профессионалов с опытом работы в кино, ТВ и интернет-медиа от 5 до 20 лет.
       </p>
     </div>
 
@@ -104,7 +104,7 @@ const team = [
   }
 
   .team-card {
-    border-radius: var(--border-radius-lg);
+    border-radius: var(--border-radius-md);
     padding: var(--space-xl);
     display: flex;
     flex-direction: row;
@@ -119,17 +119,17 @@ const team = [
   }
 
   .member-avatar {
-    width: 64px;
-    height: 64px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
-    background-color: rgba(255, 107, 0, 0.05);
+    background-color: rgba(224, 150, 92, 0.03);
     border: 1px solid var(--color-border);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
     font-family: var(--font-display);
-    font-size: 1.5rem;
+    font-size: 1.35rem;
     font-weight: 700;
     color: var(--color-primary);
     transition: all var(--transition-normal);
@@ -137,8 +137,8 @@ const team = [
 
   .team-card:hover .member-avatar {
     border-color: var(--color-primary);
-    background-color: rgba(255, 107, 0, 0.1);
-    box-shadow: 0 0 15px rgba(255, 107, 0, 0.15);
+    background-color: rgba(224, 150, 92, 0.08);
+    box-shadow: 0 0 15px rgba(224, 150, 92, 0.1);
   }
 
   .member-info {
@@ -147,24 +147,27 @@ const team = [
   }
 
   .member-role {
-    font-family: var(--font-display);
-    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
     text-transform: uppercase;
-    color: var(--color-primary);
-    font-weight: 600;
+    color: var(--color-accent);
+    font-weight: 500;
     letter-spacing: 0.1em;
     margin-bottom: 2px;
   }
 
   .member-name {
-    font-size: 1.25rem;
+    font-family: var(--font-display);
+    font-size: 1.15rem;
     font-weight: 700;
     margin-bottom: var(--space-xs);
     line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
   }
 
   .member-desc {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: var(--color-text-secondary);
     line-height: 1.5;
   }
@@ -189,8 +192,8 @@ const team = [
     }
 
     .member-avatar {
-      width: 70px;
-      height: 70px;
+      width: 64px;
+      height: 64px;
       margin-bottom: var(--space-xs);
     }
   }

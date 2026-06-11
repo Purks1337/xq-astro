@@ -3,7 +3,7 @@
 <section class="section equipment-section" id="equipment">
   <div class="container">
     <div class="equipment-header">
-      <span class="eyebrow">Оборудование</span>
+      <span class="eyebrow">Оборудование //</span>
       <h2>Профессиональное оборудование</h2>
       <p class="equipment-sub">
         Качество звука и картинки — наш главный приоритет. Мы используем передовую технику мировых брендов.
@@ -14,10 +14,10 @@
     <div class="tabs-container">
       <div class="tabs-nav" role="tablist" aria-label="Спецификация оборудования">
         <button class="tab-btn active" role="tab" aria-selected="true" data-tab="audio">
-          Аудиозапись
+          АУДИОЗАПИСЬ
         </button>
         <button class="tab-btn" role="tab" aria-selected="false" data-tab="video">
-          Видеосъемка
+          ВИДЕОСЪЕМКА
         </button>
       </div>
 
@@ -28,7 +28,7 @@
             <div class="eq-info">
               <h3>Микрофоны студийного стандарта</h3>
               <p>
-                Мы используем легендарные микрофоны <strong>AKG</strong> и <strong>SHURE</strong> — мировые стандарты точности и надежности звука. Их выбирают ведущие мировые подкастеры и музыканты для эфиров и студийных сессий.
+                Мы используем легендарные микрофоны <strong>AKG</strong> и <strong>SHURE</strong> — мировые стандарты точности и надежности звука. Их выбирают ведущие подкастеры и музыканты для эфиров и студийных сессий.
               </p>
               <p>
                 В связке с ними работает профессиональный аудиоинтерфейс <strong>Steinberg UR22C</strong>, передающий чистые басы, прозрачные высокие частоты и детальный голос без задержек.
@@ -100,18 +100,15 @@
 
   tabBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      // Deactivate other buttons
       tabBtns.forEach(b => {
         b.classList.remove('active');
         b.setAttribute('aria-selected', 'false');
       });
-      // Activate clicked button
       btn.classList.add('active');
       btn.setAttribute('aria-selected', 'true');
 
       const tabId = btn.getAttribute('data-tab');
 
-      // Show matching panel
       tabPanels.forEach(panel => {
         if (panel.id === `tab-${tabId}`) {
           panel.classList.add('active');
@@ -156,9 +153,10 @@
     background: transparent;
     border: none;
     color: var(--color-text-secondary);
-    font-family: var(--font-display);
-    font-size: 1.1rem;
-    font-weight: 600;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
     padding-bottom: var(--space-md);
     cursor: pointer;
     position: relative;
@@ -166,7 +164,7 @@
   }
 
   .tab-btn:hover {
-    color: var(--color-primary);
+    color: var(--color-accent);
   }
 
   .tab-btn::after {
@@ -175,15 +173,15 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 3px;
-    background-color: var(--color-primary);
+    height: 1.5px;
+    background-color: var(--color-accent);
     transform: scaleX(0);
     transform-origin: right;
     transition: transform var(--transition-normal);
   }
 
   .tab-btn.active {
-    color: var(--color-primary);
+    color: var(--color-accent);
   }
 
   .tab-btn.active::after {
@@ -218,13 +216,17 @@
   }
 
   .eq-info h3 {
-    font-size: 1.5rem;
+    font-family: var(--font-display);
+    font-size: 1.35rem;
     font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
   }
 
   .eq-info p {
-    font-size: 1rem;
+    font-size: 0.95rem;
     line-height: 1.6;
+    color: var(--color-text-secondary);
   }
 
   .eq-spec-list {
@@ -238,21 +240,22 @@
     border-radius: var(--border-radius-md);
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 2px;
   }
 
   .spec-name {
-    font-family: var(--font-display);
-    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
     text-transform: uppercase;
-    color: var(--color-primary);
-    font-weight: 600;
+    color: var(--color-accent);
+    font-weight: 500;
     letter-spacing: 0.1em;
   }
 
   .spec-val {
-    font-size: 1.05rem;
-    font-weight: 600;
+    font-size: 1.0rem;
+    font-weight: 500;
+    color: var(--color-text-primary);
   }
 
   @keyframes fadeIn {

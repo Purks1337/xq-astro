@@ -9,10 +9,33 @@
     let width = canvas.width = window.innerWidth;
     let height = canvas.height = window.innerHeight;
 
-    // Track mouse position
-    let mouse = { x: width / 2, y: height / 2, targetX: width / 2, targetY: height / 2, speed: 0.05 };
-    let scrollY = 0;
-    let targetScrollY = 0;
+    const particles: Array<{
+      x: number;
+      y: number;
+      vx: number;
+      vy: number;
+      r: number;
+      baseAlpha: number;
+      alpha: number;
+    }> = [];
+
+    // Particle density based on screen size
+    const particleCount = Math.min(Math.floor((width * height) / 20000), 60);
+
+    // Initialize particles
+    for (let i = 0; i < particleCount; i++) {
+      particles.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+        r: Math.random() * 1.5 + 0.5,
+        baseAlpha: Math.random() * 0.2 + 0.05,
+        alpha: 0
+      });
+    }
+
+    let mouse = { x: -1000, y: -1000, active: false };
 
     window.addEventListener('resize', () => {
       width = canvas.width = window.innerWidth;
@@ -20,93 +43,73 @@
     });
 
     window.addEventListener('mousemove', (e) => {
-      mouse.targetX = e.clientX;
-      mouse.targetY = e.clientY;
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+      mouse.active = true;
     });
 
-    window.addEventListener('scroll', () => {
-      targetScrollY = window.scrollY;
+    window.addEventListener('mouseleave', () => {
+      mouse.active = false;
     });
-
-    // Design parameters for the waves
-    const waves = [
-      {
-        y: height * 0.7,
-        length: 0.001,
-        amplitude: 60,
-        speed: 0.008,
-        phase: 0,
-        color: 'rgba(255, 107, 0, 0.12)'
-      },
-      {
-        y: height * 0.72,
-        length: 0.002,
-        amplitude: 35,
-        speed: 0.012,
-        phase: Math.PI / 3,
-        color: 'rgba(255, 107, 0, 0.07)'
-      },
-      {
-        y: height * 0.68,
-        length: 0.0008,
-        amplitude: 80,
-        speed: 0.005,
-        phase: Math.PI * 2 / 3,
-        color: 'rgba(255, 107, 0, 0.04)'
-      }
-    ];
 
     function animate() {
       if (!ctx) return;
       requestAnimationFrame(animate);
 
-      // Clear with slight trailing opacity for a tiny motion blur feel
       ctx.clearRect(0, 0, width, height);
 
-      // Smoothly interpolate mouse coordinates
-      mouse.x += (mouse.targetX - mouse.x) * mouse.speed;
-      mouse.y += (mouse.targetY - mouse.y) * mouse.speed;
+      // 1. Update & Draw Particles
+      particles.forEach((p) => {
+        p.x += p.vx;
+        p.y += p.vy;
 
-      // Smoothly interpolate scroll
-      scrollY += (targetScrollY - scrollY) * 0.1;
+        // Wrap around boundaries
+        if (p.x < 0) p.x = width;
+        if (p.x > width) p.x = 0;
+        if (p.y < 0) p.y = height;
+        if (p.y > height) p.y = 0;
 
-      // Draw each wave
-      waves.forEach((wave) => {
-        ctx.beginPath();
-        
-        // Base vertical center of this wave, affected by scroll
-        const baseHeight = wave.y - (scrollY * 0.15);
-
-        for (let i = 0; i < width; i += 2) {
-          // Calculate distance to mouse
-          const dx = i - mouse.x;
-          const dy = baseHeight - mouse.y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-          
-          // Influence of mouse: increase amplitude and frequency near mouse
-          let mouseInfluence = 0;
-          if (distance < 300) {
-            mouseInfluence = (1 - distance / 300) * 40;
-          }
-
-          // Generate sine value
-          const angle = i * wave.length + wave.phase;
-          const y = baseHeight + Math.sin(angle) * (wave.amplitude + mouseInfluence);
-
-          if (i === 0) {
-            ctx.moveTo(i, y);
-          } else {
-            ctx.lineTo(i, y);
-          }
+        // Fade in/out particle based on mouse proximity
+        let distanceToMouse = Infinity;
+        if (mouse.active) {
+          const dx = p.x - mouse.x;
+          const dy = p.y - mouse.y;
+          distanceToMouse = Math.sqrt(dx * dx + dy * dy);
         }
 
-        ctx.strokeStyle = wave.color;
-        ctx.lineWidth = 1.5;
-        ctx.stroke();
+        if (distanceToMouse < 200) {
+          p.alpha += (p.baseAlpha * 2 - p.alpha) * 0.1;
+        } else {
+          p.alpha += (p.baseAlpha - p.alpha) * 0.1;
+        }
 
-        // Increment phase for movement
-        wave.phase += wave.speed + (mouseInfluence * 0.0001);
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${p.alpha})`;
+        ctx.fill();
       });
+
+      // 2. Draw Connections
+      for (let i = 0; i < particles.length; i++) {
+        const p1 = particles[i];
+        for (let j = i + 1; j < particles.length; j++) {
+          const p2 = particles[j];
+          
+          const dx = p1.x - p2.x;
+          const dy = p1.y - p2.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < 120) {
+            const alpha = (1 - dist / 120) * 0.05;
+            ctx.beginPath();
+            ctx.moveTo(p1.x, p1.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+      }
     }
 
     animate();

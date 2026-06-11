@@ -6,25 +6,35 @@ const isPodcast = pathname.startsWith('/podcast');
 
 <header class="main-header" id="main-header">
   <div class="container header-container">
-    <a href="/" class="logo" aria-label="Quality Media Home">
-      <img src="/images/logo.svg" alt="Quality Media Logo" width="130" height="22" />
+    <a href="/" class="logo" aria-label="Quality Media Главная">
+      <img src="/images/logo.svg" alt="Quality Media Логотип" width="130" height="22" />
     </a>
 
-    <nav class="desktop-nav" aria-label="Main Navigation">
+    <nav class="desktop-nav" aria-label="Основная навигация">
       <ul class="nav-links">
         <li>
-          <a href="/" class:list={['nav-link', { active: isHome }]}>Видеопродакшн</a>
+          <a href="/" class:list={['nav-link', { active: isHome }]}>
+            <span class="dot-indicator"></span>
+            ВИДЕО
+          </a>
         </li>
         <li>
-          <a href="/podcast" class:list={['nav-link', { active: isPodcast }]}>Студия подкастов</a>
+          <a href="/podcast" class:list={['nav-link', { active: isPodcast }]}>
+            <span class="dot-indicator"></span>
+            ПОДКАСТЫ
+          </a>
         </li>
       </ul>
     </nav>
 
     <div class="header-actions">
-      <a href="tel:+79923410520" class="phone-link">+7 (992) 341-05-20</a>
-      <a href="#contact" class="btn btn-secondary btn-header-cta">Рассчитать проект</a>
-      <button class="burger-btn" id="burger-btn" aria-label="Toggle Menu" aria-expanded="false">
+      <a href="tel:+79923410520" class="phone-link">
+        <span class="phone-label">ТЕЛ //</span> +7 992 341-05-20
+      </a>
+      <a href="#contact" class="btn btn-secondary btn-header-cta">
+        ОЦЕНИТЬ ПРОЕКТ
+      </a>
+      <button class="burger-btn" id="burger-btn" aria-label="Открыть меню" aria-expanded="false">
         <span class="burger-line"></span>
         <span class="burger-line"></span>
         <span class="burger-line"></span>
@@ -36,12 +46,22 @@ const isPodcast = pathname.startsWith('/podcast');
   <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
     <div class="mobile-menu-content">
       <ul class="mobile-nav-links">
-        <li><a href="/" class:list={['mobile-nav-link', { active: isHome }]}>Видеопродакшн</a></li>
-        <li><a href="/podcast" class:list={['mobile-nav-link', { active: isPodcast }]}>Студия подкастов</a></li>
+        <li>
+          <a href="/" class:list={['mobile-nav-link', { active: isHome }]}>
+            <span class="dot-indicator"></span>
+            ВИДЕО
+          </a>
+        </li>
+        <li>
+          <a href="/podcast" class:list={['mobile-nav-link', { active: isPodcast }]}>
+            <span class="dot-indicator"></span>
+            ПОДКАСТЫ
+          </a>
+        </li>
       </ul>
       <div class="mobile-menu-footer">
-        <a href="tel:+79923410520" class="mobile-phone">+7 (992) 341-05-20</a>
-        <a href="#contact" class="btn btn-primary mobile-cta">Рассчитать проект</a>
+        <a href="tel:+79923410520" class="mobile-phone">+7 992 341-05-20</a>
+        <a href="#contact" class="btn btn-primary mobile-cta">ОЦЕНИТЬ ПРОЕКТ</a>
       </div>
     </div>
   </div>
@@ -97,16 +117,17 @@ const isPodcast = pathname.startsWith('/podcast');
     left: 0;
     width: 100%;
     z-index: 100;
-    padding: var(--space-md) 0;
+    padding: var(--space-lg) 0;
+    border-bottom: 1px solid transparent;
     transition: all var(--transition-normal);
   }
 
   .main-header.scrolled {
     background: var(--color-glass);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--color-border);
-    padding: var(--space-sm) 0;
+    padding: var(--space-md) 0;
   }
 
   .header-container {
@@ -121,6 +142,10 @@ const isPodcast = pathname.startsWith('/podcast');
     z-index: 110;
   }
 
+  .logo img {
+    filter: brightness(0.98);
+  }
+
   .desktop-nav {
     display: none;
   }
@@ -132,11 +157,14 @@ const isPodcast = pathname.startsWith('/podcast');
   }
 
   .nav-link {
-    font-family: var(--font-display);
-    font-size: 0.95rem;
-    font-weight: 500;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 400;
     color: var(--color-text-secondary);
-    position: relative;
+    letter-spacing: 0.15em;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     padding: var(--space-xs) 0;
   }
 
@@ -144,30 +172,24 @@ const isPodcast = pathname.startsWith('/podcast');
     color: var(--color-primary);
   }
 
-  .nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 2px;
+  .dot-indicator {
+    width: 4px;
+    height: 4px;
     background-color: var(--color-primary);
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform var(--transition-normal);
-  }
-
-  .nav-link:hover::after {
-    transform: scaleX(1);
-    transform-origin: left;
+    border-radius: 50%;
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all var(--transition-fast);
   }
 
   .nav-link.active {
     color: var(--color-primary);
   }
 
-  .nav-link.active::after {
-    transform: scaleX(1);
+  .nav-link.active .dot-indicator, .nav-link:hover .dot-indicator {
+    opacity: 1;
+    transform: scale(1);
+    box-shadow: 0 0 6px var(--color-primary);
   }
 
   .header-actions {
@@ -178,10 +200,14 @@ const isPodcast = pathname.startsWith('/podcast');
   }
 
   .phone-link {
-    font-family: var(--font-display);
-    font-size: 0.95rem;
-    font-weight: 600;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
     color: var(--color-text-primary);
+    letter-spacing: 0.05em;
+  }
+
+  .phone-label {
+    color: var(--color-text-muted);
   }
 
   .phone-link:hover {
@@ -190,16 +216,16 @@ const isPodcast = pathname.startsWith('/podcast');
 
   .btn-header-cta {
     display: none;
-    padding: 0.5rem 1.2rem;
-    font-size: 0.9rem;
+    padding: 0.5rem 1.0rem;
+    font-size: 0.72rem;
   }
 
   .burger-btn {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 24px;
-    height: 18px;
+    width: 22px;
+    height: 14px;
     background: transparent;
     border: none;
     cursor: pointer;
@@ -208,13 +234,13 @@ const isPodcast = pathname.startsWith('/podcast');
 
   .burger-line {
     width: 100%;
-    height: 2px;
+    height: 1px;
     background-color: var(--color-text-primary);
     transition: all var(--transition-fast);
   }
 
   .burger-btn.active .burger-line:nth-child(1) {
-    transform: translateY(8px) rotate(45deg);
+    transform: translateY(6.5px) rotate(45deg);
   }
 
   .burger-btn.active .burger-line:nth-child(2) {
@@ -222,7 +248,7 @@ const isPodcast = pathname.startsWith('/podcast');
   }
 
   .burger-btn.active .burger-line:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg);
+    transform: translateY(-6.5px) rotate(-45deg);
   }
 
   /* Mobile menu */
@@ -232,7 +258,7 @@ const isPodcast = pathname.startsWith('/podcast');
     left: 0;
     width: 100%;
     height: 100vh;
-    background-color: #000;
+    background-color: var(--color-bg-darkest);
     z-index: 105;
     opacity: 0;
     visibility: hidden;
@@ -252,7 +278,7 @@ const isPodcast = pathname.startsWith('/podcast');
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    height: 50vh;
+    height: 55vh;
     padding: var(--space-xl);
   }
 
@@ -266,13 +292,26 @@ const isPodcast = pathname.startsWith('/podcast');
 
   .mobile-nav-link {
     font-family: var(--font-display);
-    font-size: 2rem;
+    font-size: 2.2rem;
     font-weight: 700;
     color: var(--color-text-primary);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .mobile-nav-link .dot-indicator {
+    width: 8px;
+    height: 8px;
   }
 
   .mobile-nav-link.active {
     color: var(--color-primary);
+  }
+
+  .mobile-nav-link.active .dot-indicator {
+    opacity: 1;
+    transform: scale(1);
   }
 
   .mobile-menu-footer {
@@ -284,9 +323,9 @@ const isPodcast = pathname.startsWith('/podcast');
   }
 
   .mobile-phone {
-    font-family: var(--font-display);
-    font-size: 1.2rem;
-    font-weight: 600;
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    letter-spacing: 0.05em;
   }
 
   .mobile-cta {

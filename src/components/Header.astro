@@ -1,25 +1,26 @@
 ---
 const pathname = Astro.url.pathname;
-const isHome = pathname === '/' || pathname === '/index.html';
-const isPodcast = pathname.startsWith('/podcast');
+const base = import.meta.env.BASE_URL;
+const isHome = pathname === base || pathname === base + 'index.html';
+const isPodcast = pathname.startsWith(base + 'podcast');
 ---
 
 <header class="main-header" id="main-header">
   <div class="container header-container">
-    <a href="/" class="logo" aria-label="Quality Media Главная">
-      <img src="/images/logo.svg" alt="Quality Media Логотип" width="130" height="22" />
+    <a href={base} class="logo" aria-label="Quality Media Главная">
+      <img src={`${base}images/logo.svg`} alt="Quality Media Логотип" width="130" height="22" />
     </a>
 
     <nav class="desktop-nav" aria-label="Основная навигация">
       <ul class="nav-links">
         <li>
-          <a href="/" class:list={['nav-link', { active: isHome }]}>
+          <a href={base} class:list={['nav-link', { active: isHome }]}>
             <span class="dot-indicator"></span>
             ВИДЕО
           </a>
         </li>
         <li>
-          <a href="/podcast" class:list={['nav-link', { active: isPodcast }]}>
+          <a href={`${base}podcast`} class:list={['nav-link', { active: isPodcast }]}>
             <span class="dot-indicator"></span>
             ПОДКАСТЫ
           </a>
@@ -47,13 +48,13 @@ const isPodcast = pathname.startsWith('/podcast');
     <div class="mobile-menu-content">
       <ul class="mobile-nav-links">
         <li>
-          <a href="/" class:list={['mobile-nav-link', { active: isHome }]}>
+          <a href={base} class:list={['mobile-nav-link', { active: isHome }]}>
             <span class="dot-indicator"></span>
             ВИДЕО
           </a>
         </li>
         <li>
-          <a href="/podcast" class:list={['mobile-nav-link', { active: isPodcast }]}>
+          <a href={`${base}podcast`} class:list={['mobile-nav-link', { active: isPodcast }]}>
             <span class="dot-indicator"></span>
             ПОДКАСТЫ
           </a>

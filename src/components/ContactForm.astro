@@ -114,7 +114,7 @@ const {
           <div class="form-agreement">
             <label class="checkbox-label">
               <input type="checkbox" id="agreement-checkbox" name="agreement" required />
-              <span class="checkbox-text">Я согласен с <a href="/privacy" target="_blank" class="accent-link">политикой конфиденциальности</a></span>
+              <span class="checkbox-text">Я согласен с <a href={`${import.meta.env.BASE_URL}privacy`} target="_blank" class="accent-link">политикой конфиденциальности</a></span>
             </label>
             <span class="error-msg" id="agreement-error">Необходимо ваше согласие</span>
           </div>

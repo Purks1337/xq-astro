@@ -68,7 +68,7 @@ const projects = [
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3" /></svg>
               </div>
             </div>
-            <div class="poster-image-bg" style={`background-image: url('${project.thumbnail}')`}></div>
+            <div class="poster-image-bg" style={`background-image: url('${import.meta.env.BASE_URL}${project.thumbnail.startsWith('/') ? project.thumbnail.slice(1) : project.thumbnail}')`}></div>
           </div>
           <div class="project-info">
             <span class="project-cat">{project.category}</span>

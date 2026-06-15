@@ -1,38 +1,54 @@
 ---
+import { getImage } from 'astro:assets';
+import applePoster from '../assets/images/apple-poster.jpg';
+import alcoPoster from '../assets/images/alco-poster.jpg';
+import cboPoster from '../assets/images/cbo-poster.jpg';
+import bandaPoster from '../assets/images/banda-poster.jpg';
+
 const categories = ["Все", "Реклама", "Клипы", "Трансляции", "Кино", "Анимация"];
 
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : import.meta.env.BASE_URL + '/';
 
-const projects = [
+const projectsRaw = [
   {
     title: "Рекламный ролик Золотое Яблоко",
     category: "Реклама",
     desc: "Динамичный и эстетичный рекламный ролик для сети парфюмерии и косметики. Профессиональный монтаж, работа со светом и цветом.",
     videoUrl: "https://kinescope.io/embed/b2cDjUfESLQUpa3LLbZ5LZ",
-    thumbnail: "/images/apple-poster.jpg"
+    image: applePoster
   },
   {
     title: "Промо-ролик ALCO",
     category: "Реклама",
     desc: "Стильный и атмосферный промо-ролик с глубокой игрой теней, выверенной композицией кадров и премиальным качеством съемки.",
     videoUrl: "https://kinescope.io/embed/bP76PynKdWHrdwDZbjthUZ",
-    thumbnail: "/images/alco-poster.jpg"
+    image: alcoPoster
   },
   {
     title: "Имиджевый ролик ЦБО",
     category: "Кино",
     desc: "Имиджевый фильм для Центра бизнес-образования. Интервью, репортажная съемка, динамичные переходы и компиляция лучших кадров.",
     videoUrl: "https://kinescope.io/embed/qHKGrDaBEmQaQTjgi1iSkp",
-    thumbnail: "/images/cbo-poster.jpg"
+    image: cboPoster
   },
   {
     title: "Музыкальный клип Моя Банда",
     category: "Клипы",
     desc: "Атмосферный музыкальный клип. Креативная режиссура, неоновые локации, сюжетные линии и глубокая художественная цветокоррекция.",
     videoUrl: "https://kinescope.io/embed/7QcNKLymh9WcaB3Li3fqrR",
-    thumbnail: "/images/banda-poster.jpg"
+    image: bandaPoster
   }
 ];
+
+const projects = await Promise.all(
+  projectsRaw.map(async (project) => {
+    const optimized = await getImage({ src: project.image, format: 'webp', width: 600, quality: 80 });
+    return {
+      ...project,
+      thumbnailSrc: optimized.src
+    };
+  })
+);
 ---
 
 <section class="section portfolio-section" id="portfolio">
@@ -70,7 +86,13 @@ const projects = [
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3" /></svg>
               </div>
             </div>
-            <div class="poster-image-bg" style={`background-image: url('${base}${project.thumbnail.startsWith('/') ? project.thumbnail.slice(1) : project.thumbnail}')`}></div>
+            <img 
+              src={project.thumbnailSrc} 
+              loading="lazy"
+              decoding="async"
+              alt={project.title}
+              class="poster-image-bg"
+            />
           </div>
           <div class="project-info">
             <span class="project-cat">{project.category}</span>
@@ -208,9 +230,7 @@ const projects = [
   .poster-image-bg {
     width: 100%;
     height: 100%;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    object-fit: cover;
     transition: all var(--transition-normal);
   }
 

@@ -1,12 +1,20 @@
 ---
+import { getImage } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PricingPackages from '../components/PricingPackages.astro';
 import Equipment from '../components/Equipment.astro';
 import FAQ from '../components/FAQ.astro';
 import ContactForm from '../components/ContactForm.astro';
 import VideoModal from '../components/VideoModal.astro';
+import studioHero from '../assets/images/studio-hero.jpg';
+import studioTransformer from '../assets/images/studio-transformer.jpg';
+import studioLounge from '../assets/images/studio-lounge.jpg';
 
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : import.meta.env.BASE_URL + '/';
+
+const optimizedHero = await getImage({ src: studioHero, format: 'webp', width: 1200, quality: 80 });
+const optimizedTransformer = await getImage({ src: studioTransformer, format: 'webp', width: 800, quality: 80 });
+const optimizedLounge = await getImage({ src: studioLounge, format: 'webp', width: 800, quality: 80 });
 ---
 
 <BaseLayout 
@@ -54,10 +62,15 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
           </div>
 
           <div class="viewport-content">
-            <div class="poster-media" style={`background-image: url('${base}images/studio-hero.jpg')`}>
-              <div class="grid-overlay"></div>
-              <div class="center-target"></div>
-            </div>
+            <img 
+              src={optimizedHero.src} 
+              fetchpriority="high"
+              decoding="async"
+              alt="Студия подкастов Хвалите Quality" 
+              class="poster-media" 
+            />
+            <div class="grid-overlay"></div>
+            <div class="center-target"></div>
           </div>
         </div>
       </div>
@@ -75,7 +88,15 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
 
       <div class="locations-grid">
         <div class="loc-card glass">
-          <div class="loc-visual location-transformer" style={`background-image: url('${base}images/studio-transformer.jpg')`}></div>
+          <div class="loc-visual">
+            <img 
+              src={optimizedTransformer.src} 
+              loading="lazy" 
+              decoding="async" 
+              alt="Локация Трансформер" 
+              class="loc-img" 
+            />
+          </div>
           <div class="loc-info">
             <h3>Локация Трансформер</h3>
             <p>
@@ -85,7 +106,15 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
         </div>
 
         <div class="loc-card glass">
-          <div class="loc-visual location-lounge" style={`background-image: url('${base}images/studio-lounge.jpg')`}></div>
+          <div class="loc-visual">
+            <img 
+              src={optimizedLounge.src} 
+              loading="lazy" 
+              decoding="async" 
+              alt="Лаундж Локация" 
+              class="loc-img" 
+            />
+          </div>
           <div class="loc-info">
             <h3>Лаундж Локация</h3>
             <p>
@@ -261,8 +290,7 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     width: 100%;
     height: 100%;
     opacity: 0.6;
-    background-size: cover;
-    background-position: center;
+    object-fit: cover;
     transition: all var(--transition-slow);
   }
 
@@ -332,16 +360,18 @@ const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL :
     aspect-ratio: 16 / 10;
     background-color: #101012;
     position: relative;
+    overflow: hidden;
   }
 
-  .location-transformer {
-    background-size: cover;
-    background-position: center;
+  .loc-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all var(--transition-normal);
   }
 
-  .location-lounge {
-    background-size: cover;
-    background-position: center;
+  .loc-card:hover .loc-img {
+    transform: scale(1.03);
   }
 
   .loc-info {

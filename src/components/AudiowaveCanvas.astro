@@ -3,117 +3,119 @@
 <canvas id="audiowave-canvas" aria-hidden="true"></canvas>
 
 <script>
-  const canvas = document.getElementById('audiowave-canvas') as HTMLCanvasElement;
-  if (canvas) {
-    const ctx = canvas.getContext('2d');
-    let width = canvas.width = window.innerWidth;
-    let height = canvas.height = window.innerHeight;
+  window.addEventListener('load', () => {
+    const canvas = document.getElementById('audiowave-canvas') as HTMLCanvasElement;
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      let width = canvas.width = window.innerWidth;
+      let height = canvas.height = window.innerHeight;
 
-    const particles: Array<{
-      x: number;
-      y: number;
-      vx: number;
-      vy: number;
-      r: number;
-      baseAlpha: number;
-      alpha: number;
-    }> = [];
+      const particles: Array<{
+        x: number;
+        y: number;
+        vx: number;
+        vy: number;
+        r: number;
+        baseAlpha: number;
+        alpha: number;
+      }> = [];
 
-    // Particle density based on screen size
-    const particleCount = Math.min(Math.floor((width * height) / 20000), 60);
+      // Particle density based on screen size
+      const particleCount = Math.min(Math.floor((width * height) / 20000), 60);
 
-    // Initialize particles
-    for (let i = 0; i < particleCount; i++) {
-      particles.push({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.3,
-        vy: (Math.random() - 0.5) * 0.3,
-        r: Math.random() * 1.5 + 0.5,
-        baseAlpha: Math.random() * 0.2 + 0.05,
-        alpha: 0
-      });
-    }
+      // Initialize particles
+      for (let i = 0; i < particleCount; i++) {
+        particles.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: (Math.random() - 0.5) * 0.3,
+          vy: (Math.random() - 0.5) * 0.3,
+          r: Math.random() * 1.5 + 0.5,
+          baseAlpha: Math.random() * 0.2 + 0.05,
+          alpha: 0
+        });
+      }
 
-    let mouse = { x: -1000, y: -1000, active: false };
+      let mouse = { x: -1000, y: -1000, active: false };
 
-    window.addEventListener('resize', () => {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-    });
-
-    window.addEventListener('mousemove', (e) => {
-      mouse.x = e.clientX;
-      mouse.y = e.clientY;
-      mouse.active = true;
-    });
-
-    window.addEventListener('mouseleave', () => {
-      mouse.active = false;
-    });
-
-    function animate() {
-      if (!ctx) return;
-      requestAnimationFrame(animate);
-
-      ctx.clearRect(0, 0, width, height);
-
-      // 1. Update & Draw Particles
-      particles.forEach((p) => {
-        p.x += p.vx;
-        p.y += p.vy;
-
-        // Wrap around boundaries
-        if (p.x < 0) p.x = width;
-        if (p.x > width) p.x = 0;
-        if (p.y < 0) p.y = height;
-        if (p.y > height) p.y = 0;
-
-        // Fade in/out particle based on mouse proximity
-        let distanceToMouse = Infinity;
-        if (mouse.active) {
-          const dx = p.x - mouse.x;
-          const dy = p.y - mouse.y;
-          distanceToMouse = Math.sqrt(dx * dx + dy * dy);
-        }
-
-        if (distanceToMouse < 200) {
-          p.alpha += (p.baseAlpha * 2 - p.alpha) * 0.1;
-        } else {
-          p.alpha += (p.baseAlpha - p.alpha) * 0.1;
-        }
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 255, 255, ${p.alpha})`;
-        ctx.fill();
+      window.addEventListener('resize', () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
       });
 
-      // 2. Draw Connections
-      for (let i = 0; i < particles.length; i++) {
-        const p1 = particles[i];
-        for (let j = i + 1; j < particles.length; j++) {
-          const p2 = particles[j];
-          
-          const dx = p1.x - p2.x;
-          const dy = p1.y - p2.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
+      window.addEventListener('mousemove', (e) => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+        mouse.active = true;
+      });
 
-          if (dist < 120) {
-            const alpha = (1 - dist / 120) * 0.05;
-            ctx.beginPath();
-            ctx.moveTo(p1.x, p1.y);
-            ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`;
-            ctx.lineWidth = 0.5;
-            ctx.stroke();
+      window.addEventListener('mouseleave', () => {
+        mouse.active = false;
+      });
+
+      function animate() {
+        if (!ctx) return;
+        requestAnimationFrame(animate);
+
+        ctx.clearRect(0, 0, width, height);
+
+        // 1. Update & Draw Particles
+        particles.forEach((p) => {
+          p.x += p.vx;
+          p.y += p.vy;
+
+          // Wrap around boundaries
+          if (p.x < 0) p.x = width;
+          if (p.x > width) p.x = 0;
+          if (p.y < 0) p.y = height;
+          if (p.y > height) p.y = 0;
+
+          // Fade in/out particle based on mouse proximity
+          let distanceToMouse = Infinity;
+          if (mouse.active) {
+            const dx = p.x - mouse.x;
+            const dy = p.y - mouse.y;
+            distanceToMouse = Math.sqrt(dx * dx + dy * dy);
+          }
+
+          if (distanceToMouse < 200) {
+            p.alpha += (p.baseAlpha * 2 - p.alpha) * 0.1;
+          } else {
+            p.alpha += (p.baseAlpha - p.alpha) * 0.1;
+          }
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255, 255, 255, ${p.alpha})`;
+          ctx.fill();
+        });
+
+        // 2. Draw Connections
+        for (let i = 0; i < particles.length; i++) {
+          const p1 = particles[i];
+          for (let j = i + 1; j < particles.length; j++) {
+            const p2 = particles[j];
+            
+            const dx = p1.x - p2.x;
+            const dy = p1.y - p2.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist < 120) {
+              const alpha = (1 - dist / 120) * 0.05;
+              ctx.beginPath();
+              ctx.moveTo(p1.x, p1.y);
+              ctx.lineTo(p2.x, p2.y);
+              ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`;
+              ctx.lineWidth = 0.5;
+              ctx.stroke();
+            }
           }
         }
       }
-    }
 
-    animate();
-  }
+      animate();
+    }
+  });
 </script>
 
 <style>

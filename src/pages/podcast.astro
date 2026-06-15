@@ -1,5 +1,5 @@
 ---
-import { getImage } from 'astro:assets';
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PricingPackages from '../components/PricingPackages.astro';
 import Equipment from '../components/Equipment.astro';
@@ -11,10 +11,6 @@ import studioTransformer from '../assets/images/studio-transformer.jpg';
 import studioLounge from '../assets/images/studio-lounge.jpg';
 
 const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : import.meta.env.BASE_URL + '/';
-
-const optimizedHero = await getImage({ src: studioHero, format: 'webp', width: 1200, quality: 80 });
-const optimizedTransformer = await getImage({ src: studioTransformer, format: 'webp', width: 800, quality: 80 });
-const optimizedLounge = await getImage({ src: studioLounge, format: 'webp', width: 800, quality: 80 });
 ---
 
 <BaseLayout 
@@ -62,8 +58,11 @@ const optimizedLounge = await getImage({ src: studioLounge, format: 'webp', widt
           </div>
 
           <div class="viewport-content">
-            <img 
-              src={optimizedHero.src} 
+            <Image 
+              src={studioHero} 
+              widths={[400, 800, 1200]} 
+              sizes="(max-width: 768px) 100vw, 80vw" 
+              format="avif"
               fetchpriority="high"
               decoding="async"
               alt="Студия подкастов Хвалите Quality" 
@@ -89,8 +88,11 @@ const optimizedLounge = await getImage({ src: studioLounge, format: 'webp', widt
       <div class="locations-grid">
         <div class="loc-card glass">
           <div class="loc-visual">
-            <img 
-              src={optimizedTransformer.src} 
+            <Image 
+              src={studioTransformer} 
+              widths={[400, 600, 800]} 
+              sizes="(max-width: 767px) 100vw, 50vw" 
+              format="avif"
               loading="lazy" 
               decoding="async" 
               alt="Локация Трансформер" 
@@ -107,8 +109,11 @@ const optimizedLounge = await getImage({ src: studioLounge, format: 'webp', widt
 
         <div class="loc-card glass">
           <div class="loc-visual">
-            <img 
-              src={optimizedLounge.src} 
+            <Image 
+              src={studioLounge} 
+              widths={[400, 600, 800]} 
+              sizes="(max-width: 767px) 100vw, 50vw" 
+              format="avif"
               loading="lazy" 
               decoding="async" 
               alt="Лаундж Локация" 

@@ -34,7 +34,18 @@ const resolvedOgImage = ogImage.startsWith('/') && !ogImage.startsWith(baseUrl)
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Unbounded:wght@700;800&display=swap" rel="stylesheet" />
+    <link 
+      rel="stylesheet" 
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Unbounded:wght@700;800&display=swap" 
+      media="print" 
+      onload="this.media='all'" 
+    />
+    <noscript>
+      <link 
+        rel="stylesheet" 
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Unbounded:wght@700;800&display=swap" 
+      />
+    </noscript>
 
     <!-- SEO Meta Tags -->
     {import.meta.env.PUBLIC_NO_INDEX === 'true' && <meta name="robots" content="noindex, nofollow" />}

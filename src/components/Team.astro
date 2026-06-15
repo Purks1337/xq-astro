@@ -25,18 +25,6 @@ const team = [
     initials: "S"
   },
   {
-    name: "Валерий",
-    role: "CCO / Commercial",
-    desc: "Коммерческий директор. Продажи и коммуникация с ключевыми партнерами.",
-    initials: "V"
-  },
-  {
-    name: "Андрей",
-    role: "SDR / Продажи",
-    desc: "Деловые переговоры и первичная коммуникация с клиентами.",
-    initials: "A"
-  },
-  {
     name: "Святослав",
     role: "Менеджер проектов",
     desc: "Организация съемочного процесса, контроль соблюдения сроков и бюджета.",
@@ -98,24 +86,47 @@ const team = [
   }
 
   .team-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-xl);
+    display: flex;
+    overflow-x: auto;
+    gap: var(--space-lg);
+    scroll-behavior: smooth;
+    padding-bottom: var(--space-lg);
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(224, 150, 92, 0.3) transparent;
+  }
+
+  .team-grid::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .team-grid::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .team-grid::-webkit-scrollbar-thumb {
+    background-color: rgba(224, 150, 92, 0.2);
+    border-radius: var(--border-radius-sm);
+  }
+
+  .team-grid::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-primary);
   }
 
   .team-card {
+    flex: 0 0 280px;
     border-radius: var(--border-radius-md);
     padding: var(--space-xl);
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: var(--space-lg);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-md);
     transition: all var(--transition-normal);
   }
 
   .team-card:hover {
     border-color: var(--color-primary);
-    transform: translateY(-2px);
+    transform: translateY(-4px);
   }
 
   .member-avatar {
@@ -170,31 +181,5 @@ const team = [
     font-size: 0.85rem;
     color: var(--color-text-secondary);
     line-height: 1.5;
-  }
-
-  /* Media Queries */
-  @media (min-width: 768px) {
-    .team-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  @media (min-width: 1200px) {
-    .team-grid {
-      grid-template-columns: repeat(4, 1fr);
-      gap: var(--space-lg);
-    }
-    
-    .team-card {
-      flex-direction: column;
-      align-items: flex-start;
-      text-align: left;
-    }
-
-    .member-avatar {
-      width: 64px;
-      height: 64px;
-      margin-bottom: var(--space-xs);
-    }
   }
 </style>

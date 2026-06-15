@@ -26,6 +26,7 @@ const {
     <meta name="generator" content={Astro.generator} />
 
     <!-- SEO Meta Tags -->
+    {import.meta.env.PUBLIC_NO_INDEX === 'true' && <meta name="robots" content="noindex, nofollow" />}
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="keywords" content="видеопродакшн, съемка видео, видеосъемка, студия видеопродакшна, хвалите quality, съемка музыкальных клипов, съемка интервью, прямые трансляции, видеомонтаж, создание видеороликов, видео для бизнеса, рекламный ролик, снять рекламу, снять рекламный ролик, подкасты Екатеринбург, аренда студии подкастов" />

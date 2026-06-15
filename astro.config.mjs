@@ -9,4 +9,7 @@ const base = process.env.BASE_PATH
 // https://astro.build/config
 export default defineConfig({
   base: base,
+  build: {
+    inlineStylesheets: 'always'
+  }
 });

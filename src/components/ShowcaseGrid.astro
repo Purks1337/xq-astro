@@ -66,7 +66,7 @@ const projects = [
 
     <!-- Portfolio Grid -->
     <div class="projects-grid" id="projects-grid">
-      {projects.map(project => (
+      {projects.map((project, idx) => (
         <div class="project-card glass" data-category={project.category} data-video-src={project.videoUrl}>
           <div class="project-poster">
             <span class="film-border top-border"></span>
@@ -81,7 +81,8 @@ const projects = [
               widths={[360, 540, 720]} 
               sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw" 
               format="avif"
-              loading="lazy"
+              loading={idx === 0 ? "eager" : "lazy"}
+              fetchpriority={idx === 0 ? "high" : "auto"}
               decoding="async"
               alt={project.title}
               class="poster-image-bg"

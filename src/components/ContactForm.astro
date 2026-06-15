@@ -8,6 +8,8 @@ const {
   title = "Рассчитать стоимость проекта", 
   subtitle = "Заполните поля ниже, и мы свяжемся с вами в течение часа с детальным коммерческим предложением." 
 } = Astro.props;
+
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : import.meta.env.BASE_URL + '/';
 ---
 
 <section class="section contact-section" id="contact">
@@ -114,7 +116,7 @@ const {
           <div class="form-agreement">
             <label class="checkbox-label">
               <input type="checkbox" id="agreement-checkbox" name="agreement" required />
-              <span class="checkbox-text">Я согласен с <a href={`${import.meta.env.BASE_URL}privacy`} target="_blank" class="accent-link">политикой конфиденциальности</a></span>
+              <span class="checkbox-text">Я согласен с <a href={`${base}privacy`} target="_blank" class="accent-link">политикой конфиденциальности</a></span>
             </label>
             <span class="error-msg" id="agreement-error">Необходимо ваше согласие</span>
           </div>

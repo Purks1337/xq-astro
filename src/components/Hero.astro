@@ -8,6 +8,8 @@ const {
   title = "ХВАЛИТЕ QUALITY", 
   subtitle = "Профессиональная студия видеопроизводства и записи подкастов в Екатеринбурге. Создаем рекламные ролики, клипы, интервью и трансляции от сценария до финального рендера." 
 } = Astro.props;
+
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : import.meta.env.BASE_URL + '/';
 ---
 
 <section class="hero-section">
@@ -48,7 +50,7 @@ const {
         </div>
 
         <div class="viewport-content" data-video-src="https://kinescope.io/embed/qR2muYoMmovDtEFRDfMHfc">
-          <div class="poster-media" style={`background-image: url('${import.meta.env.BASE_URL}images/showreel-poster.jpg')`}>
+          <div class="poster-media" style={`background-image: url('${base}images/showreel-poster.jpg')`}>
             <div class="grid-overlay"></div>
             <div class="center-target"></div>
           </div>

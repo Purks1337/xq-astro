@@ -5,6 +5,8 @@ import Equipment from '../components/Equipment.astro';
 import FAQ from '../components/FAQ.astro';
 import ContactForm from '../components/ContactForm.astro';
 import VideoModal from '../components/VideoModal.astro';
+
+const base = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : import.meta.env.BASE_URL + '/';
 ---
 
 <BaseLayout 
@@ -52,7 +54,7 @@ import VideoModal from '../components/VideoModal.astro';
           </div>
 
           <div class="viewport-content">
-            <div class="poster-media" style={`background-image: url('${import.meta.env.BASE_URL}images/studio-hero.jpg')`}>
+            <div class="poster-media" style={`background-image: url('${base}images/studio-hero.jpg')`}>
               <div class="grid-overlay"></div>
               <div class="center-target"></div>
             </div>
@@ -73,7 +75,7 @@ import VideoModal from '../components/VideoModal.astro';
 
       <div class="locations-grid">
         <div class="loc-card glass">
-          <div class="loc-visual location-transformer" style={`background-image: url('${import.meta.env.BASE_URL}images/studio-transformer.jpg')`}></div>
+          <div class="loc-visual location-transformer" style={`background-image: url('${base}images/studio-transformer.jpg')`}></div>
           <div class="loc-info">
             <h3>Локация Трансформер</h3>
             <p>
@@ -83,7 +85,7 @@ import VideoModal from '../components/VideoModal.astro';
         </div>
 
         <div class="loc-card glass">
-          <div class="loc-visual location-lounge" style={`background-image: url('${import.meta.env.BASE_URL}images/studio-lounge.jpg')`}></div>
+          <div class="loc-visual location-lounge" style={`background-image: url('${base}images/studio-lounge.jpg')`}></div>
           <div class="loc-info">
             <h3>Лаундж Локация</h3>
             <p>
